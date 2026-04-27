@@ -1,5 +1,6 @@
 import { Inter, Instrument_Serif } from 'next/font/google';
 import '@/styles/main.scss';
+import Script from 'next/script';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -94,6 +95,18 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${inter.variable} ${instrumentSerif.variable}`}>
       <head>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-P1NESTQMJF"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-P1NESTQMJF');
+    `}
+        </Script>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://api.groq.com" />
