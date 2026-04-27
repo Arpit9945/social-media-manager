@@ -109,6 +109,13 @@ export default function ReelExporter({ template, data, user, onBack }) {
       const canvas = canvasRef.current;
       if (!canvas) throw new Error('Canvas not ready');
 
+      // Guarantee logo is loaded BEFORE export starts — otherwise frames render
+      // without the logo even if user uploaded one.
+      if (data?.logoUrl && data?.showLogo !== false) {
+        const { loadLogo } = await import('@/lib/reel/canvasEngine');
+        await loadLogo(data.logoUrl);
+      }
+
       let blob;
       let extension;
 

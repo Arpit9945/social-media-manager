@@ -193,10 +193,202 @@ export function drawCircle(ctx, x, y, radius) {
 }
 
 // =====================================
+// LOGO LOADING & RENDERING
+// =====================================
+
+// Cache loaded logo Image objects so we don't reload every frame
+// Stored values: HTMLImageElement (success) or 'failed' (sentinel for permanent failures)
+const _logoCache = new Map();
+// In-flight loads dedupe — multiple useLogoPreload calls for same URL share one fetch
+const _logoLoading = new Map();
+
+// Load image from URL or data-URL into HTMLImageElement (cached)
+export function loadLogo(url) {
+  if (!url) return Promise.resolve(null);
+
+  // Check cache - only return if it's a valid loaded image
+  if (_logoCache.has(url)) {
+    const cached = _logoCache.get(url);
+    if (cached === 'failed') return Promise.resolve(null);
+    if (cached && cached.complete && cached.naturalWidth > 0) {
+      return Promise.resolve(cached);
+    }
+    // Cache entry is stale/invalid - remove and reload
+    _logoCache.delete(url);
+  }
+
+  // Dedupe in-flight requests - if already loading, return same promise
+  if (_logoLoading.has(url)) {
+    return _logoLoading.get(url);
+  }
+
+  const loadPromise = new Promise((resolve) => {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => {
+      _logoCache.set(url, img);
+      _logoLoading.delete(url);
+      resolve(img);
+    };
+    img.onerror = () => {
+      // Mark as failed (not null) so cache check distinguishes
+      // 'never tried' vs 'tried and failed'
+      _logoCache.set(url, 'failed');
+      _logoLoading.delete(url);
+      resolve(null);
+    };
+    // Set src last so handlers are attached
+    img.src = url;
+  });
+
+  _logoLoading.set(url, loadPromise);
+  return loadPromise;
+}
+
+// Get cached logo synchronously (for render loop, after preload)
+export function getCachedLogo(url) {
+  if (!url) return null;
+  const img = _logoCache.get(url);
+  // Reject sentinels and falsy values explicitly
+  if (!img || img === 'failed') return null;
+  if (img.complete && img.naturalWidth > 0) return img;
+  return null;
+}
+
+// Draw logo at specified position with size + opacity
+// position: 'top-left' | 'top-right' | 'top-center' | 'bottom-left' | 'bottom-right' | 'bottom-center'
+export function drawLogo(ctx, logoImg, opts = {}) {
+  if (!logoImg) return;
+
+  const {
+    position = 'top-left',
+    size = 110,
+    margin = 60,
+    opacity = 1,
+    background = null, // 'pill' | 'circle' | null
+    backgroundColor = '#ffffff',
+    backgroundOpacity = 0.95,
+  } = opts;
+
+  // Calculate position
+  let x, y;
+  switch (position) {
+    case 'top-left':
+      x = margin;
+      y = margin;
+      break;
+    case 'top-right':
+      x = REEL_WIDTH - margin - size;
+      y = margin;
+      break;
+    case 'top-center':
+      x = (REEL_WIDTH - size) / 2;
+      y = margin;
+      break;
+    case 'bottom-left':
+      x = margin;
+      y = REEL_HEIGHT - margin - size;
+      break;
+    case 'bottom-right':
+      x = REEL_WIDTH - margin - size;
+      y = REEL_HEIGHT - margin - size;
+      break;
+    case 'bottom-center':
+      x = (REEL_WIDTH - size) / 2;
+      y = REEL_HEIGHT - margin - size;
+      break;
+    default:
+      x = margin;
+      y = margin;
+  }
+
+  ctx.save();
+  ctx.globalAlpha = opacity;
+
+  // Optional background pill behind logo
+  if (background === 'pill') {
+    const pad = 16;
+    ctx.globalAlpha = opacity * backgroundOpacity;
+    ctx.fillStyle = backgroundColor;
+    drawRoundedRect(ctx, x - pad, y - pad, size + pad * 2, size + pad * 2, 24);
+    ctx.fill();
+    ctx.globalAlpha = opacity;
+  } else if (background === 'circle') {
+    const pad = 12;
+    ctx.globalAlpha = opacity * backgroundOpacity;
+    ctx.fillStyle = backgroundColor;
+    ctx.beginPath();
+    ctx.arc(x + size / 2, y + size / 2, size / 2 + pad, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.globalAlpha = opacity;
+  }
+
+  // Calculate aspect ratio - preserve it
+  const aspectRatio = logoImg.naturalWidth / logoImg.naturalHeight;
+  let drawW = size;
+  let drawH = size;
+
+  if (aspectRatio > 1) {
+    // Wider than tall
+    drawH = size / aspectRatio;
+    y += (size - drawH) / 2; // Center vertically in box
+  } else if (aspectRatio < 1) {
+    // Taller than wide
+    drawW = size * aspectRatio;
+    x += (size - drawW) / 2; // Center horizontally in box
+  }
+
+  ctx.drawImage(logoImg, x, y, drawW, drawH);
+  ctx.restore();
+}
+
+// =====================================
+// SHARED LOGO OVERLAY — call from EVERY render path
+// =====================================
+// This is the single source of truth for "should we draw a logo on this canvas?"
+// Use it in: renderFrame (animation loop), renderStatic (template thumbnails),
+// PostGenerator preview/export, Library thumbnails — anywhere a frame is rendered.
+//
+// Returns true if logo was drawn, false if skipped (no logo or not ready).
+// Safe to call even when logo isn't loaded yet — just returns false silently.
+export function applyLogoOverlay(ctx, data) {
+  if (!data) return false;
+  if (!data.logoUrl) return false;
+  if (data.showLogo === false) return false;
+
+  const logoImg = getCachedLogo(data.logoUrl);
+  if (!logoImg) return false;
+
+  drawLogo(ctx, logoImg, {
+    position: data.logoPosition || 'top-right',
+    size: data.logoSize || 110,
+    opacity: data.logoOpacity ?? 1,
+    background: data.logoBackground || 'pill',
+    backgroundColor: '#ffffff',
+    backgroundOpacity: 0.92,
+  });
+  return true;
+}
+
+// =====================================
 // MAIN RENDER FUNCTION
 // =====================================
 // Each template provides a render(ctx, frame, totalFrames, data) function
 export function renderFrame(ctx, template, frame, data) {
   const progress = frame / TOTAL_FRAMES; // 0 to 1 over 15 sec
   template.render(ctx, frame, TOTAL_FRAMES, progress, data);
+  applyLogoOverlay(ctx, data);
+}
+
+// Render a single static frame (for thumbnails, post export, library cards).
+// This is the canonical way to draw a "still" version of a template.
+// Always call this instead of `template.renderStatic` directly so logo overlay applies.
+export function renderStaticFrame(ctx, template, data) {
+  if (template.renderStatic) {
+    template.renderStatic(ctx, data);
+  } else {
+    // Default fallback: 80% progress = "fully revealed" state
+    template.render(ctx, 360, TOTAL_FRAMES, 0.8, data);
+  }
+  applyLogoOverlay(ctx, data);
 }

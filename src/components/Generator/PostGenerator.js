@@ -4,8 +4,10 @@ import { useState, useRef, useEffect } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import ToolHeader from '@/components/Shared/ToolHeader';
 import TemplatePicker from './TemplatePicker';
+import LogoControls from './LogoControls';
 import { TEMPLATES, getDefaultData } from './templates';
-import { REEL_WIDTH, REEL_HEIGHT } from '@/lib/reel/canvasEngine';
+import { REEL_WIDTH, REEL_HEIGHT, renderStaticFrame } from '@/lib/reel/canvasEngine';
+import { useLogoPreload } from '@/lib/reel/useLogoPreload';
 import styles from './PostGenerator.module.scss';
 
 const FORMATS = [
@@ -21,8 +23,14 @@ export default function PostGenerator({ user, profile }) {
   const [exportFormat, setExportFormat] = useState('png');
   const [isExporting, setIsExporting] = useState(false);
   const [error, setError] = useState('');
+  const [aiGenerating, setAiGenerating] = useState(false);
+  const [aiTopic, setAiTopic] = useState('');
+  const [aiError, setAiError] = useState('');
   const previewRef = useRef(null);
   const exportRef = useRef(null);
+
+  // Preload logo
+  const logoState = useLogoPreload(formData?.showLogo ? formData?.logoUrl : null);
 
   const handlePickTemplate = (template) => {
     setSelectedTemplate(template);
@@ -39,20 +47,53 @@ export default function PostGenerator({ user, profile }) {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
+  const handleAiGenerate = async () => {
+    if (!aiTopic.trim()) {
+      setAiError('Topic batao kya banana hai');
+      return;
+    }
+    setAiError('');
+    setAiGenerating(true);
+    try {
+      const response = await fetch('/api/generate-content', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          topic: aiTopic.trim(),
+          templateId: selectedTemplate.id,
+          templateName: selectedTemplate.name,
+          format: 'static',
+        }),
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || 'AI generation failed');
+
+      setFormData((prev) => ({
+        ...prev,
+        title: data.content.title || prev.title,
+        subtitle: data.content.subtitle || prev.subtitle,
+        cta: data.content.cta || prev.cta,
+      }));
+      setAiTopic('');
+    } catch (err) {
+      setAiError(err.message || 'Generation failed. Try again.');
+    } finally {
+      setAiGenerating(false);
+    }
+  };
+
   // Render preview as data changes
   useEffect(() => {
     if (step !== 'editor' || !selectedTemplate || !formData || !previewRef.current) return;
 
     const canvas = previewRef.current;
     const ctx = canvas.getContext('2d');
-    
-    if (selectedTemplate.renderStatic) {
-      selectedTemplate.renderStatic(ctx, formData);
-    } else {
-      // Default to 80% progress
-      selectedTemplate.render(ctx, 360, 450, 0.8, formData);
-    }
-  }, [selectedTemplate, formData, step]);
+
+    // renderStaticFrame handles both template render + logo overlay in one call.
+    // logoState.ready in deps ensures we re-render once the logo image finishes loading.
+    renderStaticFrame(ctx, selectedTemplate, formData);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedTemplate, formData, step, logoState.ready]);
 
   const downloadBlob = (blob, filename) => {
     const url = URL.createObjectURL(blob);
@@ -75,13 +116,16 @@ export default function PostGenerator({ user, profile }) {
       if (!canvas) throw new Error('Export canvas not ready');
 
       const ctx = canvas.getContext('2d');
-      
-      // Render at 80% progress for "fully revealed" state
-      if (selectedTemplate.renderStatic) {
-        selectedTemplate.renderStatic(ctx, formData);
-      } else {
-        selectedTemplate.render(ctx, 360, 450, 0.8, formData);
+
+      // Guarantee logo is loaded BEFORE we render — otherwise it'll be missing
+      // from the exported file even though the preview shows it.
+      if (formData?.logoUrl && formData?.showLogo !== false) {
+        const { loadLogo } = await import('@/lib/reel/canvasEngine');
+        await loadLogo(formData.logoUrl);
       }
+
+      // renderStaticFrame handles template + logo overlay in one go.
+      renderStaticFrame(ctx, selectedTemplate, formData);
 
       const format = FORMATS.find((f) => f.id === exportFormat);
       
@@ -178,6 +222,46 @@ export default function PostGenerator({ user, profile }) {
                 </div>
 
                 <div className={styles.form}>
+                  {/* AI Generate block */}
+                  <div className={styles.aiGenBlock}>
+                    <div className={styles.aiGenHeader}>
+                      <span className={styles.aiGenIcon}>✨</span>
+                      <span className={styles.aiGenLabel}>Generate with AI</span>
+                    </div>
+                    <div className={styles.aiGenRow}>
+                      <input
+                        type="text"
+                        value={aiTopic}
+                        onChange={(e) => setAiTopic(e.target.value)}
+                        placeholder="Topic ya idea..."
+                        className={styles.aiGenInput}
+                        maxLength={120}
+                        disabled={aiGenerating}
+                        onKeyDown={(e) => e.key === 'Enter' && !aiGenerating && handleAiGenerate()}
+                      />
+                      <button
+                        onClick={handleAiGenerate}
+                        disabled={aiGenerating || !aiTopic.trim()}
+                        className={styles.aiGenBtn}
+                      >
+                        {aiGenerating ? (
+                          <>
+                            <span className={styles.aiSpinner}></span>
+                            Generating
+                          </>
+                        ) : (
+                          <>
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                              <path d="M7 1l1.5 4 4 1.5-4 1.5L7 12l-1.5-4-4-1.5 4-1.5L7 1z" stroke="currentColor" strokeWidth="1.25" strokeLinejoin="round" />
+                            </svg>
+                            Generate
+                          </>
+                        )}
+                      </button>
+                    </div>
+                    {aiError && <p className={styles.aiGenError}>{aiError}</p>}
+                  </div>
+
                   <div className={styles.field}>
                     <label className={styles.label}>Title / Hook</label>
                     <textarea
@@ -215,6 +299,9 @@ export default function PostGenerator({ user, profile }) {
                       maxLength={60}
                     />
                   </div>
+
+                  {/* Logo Controls */}
+                  <LogoControls user={user} formData={formData} onChange={setFormData} />
 
                   <details className={styles.advancedToggle}>
                     <summary className={styles.advancedSummary}>

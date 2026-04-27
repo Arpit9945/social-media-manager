@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { renderStaticFrame, loadLogo } from '@/lib/reel/canvasEngine';
 import { getDefaultData } from './templates';
 import styles from './TemplatePicker.module.scss';
 
@@ -14,11 +15,20 @@ function TemplateCard({ template, brandProfile, onPick }) {
     const ctx = canvas.getContext('2d');
     const data = getDefaultData(template, brandProfile);
 
-    // Render static preview at 80% progress (rich state)
-    if (template.renderStatic) {
-      template.renderStatic(ctx, data);
-    } else {
-      template.render(ctx, 360, 450, 0.8, data);
+    // Render once immediately (without logo, in case logo is slow/missing)
+    renderStaticFrame(ctx, template, data);
+
+    // If a logo is configured, preload it then re-render so it appears
+    if (data.logoUrl && data.showLogo !== false) {
+      let cancelled = false;
+      loadLogo(data.logoUrl).then((img) => {
+        if (cancelled || !img) return;
+        // Re-render with logo now in cache
+        renderStaticFrame(ctx, template, data);
+      });
+      return () => {
+        cancelled = true;
+      };
     }
   }, [template, brandProfile]);
 

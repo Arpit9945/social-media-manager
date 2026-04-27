@@ -5,6 +5,7 @@ import ToolHeader from '@/components/Shared/ToolHeader';
 import TemplatePicker from './TemplatePicker';
 import ReelPreview from './ReelPreview';
 import ReelExporter from './ReelExporter';
+import LogoControls from './LogoControls';
 import { TEMPLATES, getDefaultData } from './templates';
 import styles from './ReelGenerator.module.scss';
 
@@ -12,6 +13,9 @@ export default function ReelGenerator({ user, profile }) {
   const [step, setStep] = useState('template'); // 'template' | 'editor' | 'export'
   const [selectedTemplate, setSelectedTemplate] = useState(null);
   const [formData, setFormData] = useState(null);
+  const [aiGenerating, setAiGenerating] = useState(false);
+  const [aiTopic, setAiTopic] = useState('');
+  const [aiError, setAiError] = useState('');
 
   const handlePickTemplate = (template) => {
     setSelectedTemplate(template);
@@ -30,6 +34,41 @@ export default function ReelGenerator({ user, profile }) {
 
   const updateField = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const handleAiGenerate = async () => {
+    if (!aiTopic.trim()) {
+      setAiError('Topic batao kya banana hai');
+      return;
+    }
+    setAiError('');
+    setAiGenerating(true);
+    try {
+      const response = await fetch('/api/generate-content', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          topic: aiTopic.trim(),
+          templateId: selectedTemplate.id,
+          templateName: selectedTemplate.name,
+          format: 'reel',
+        }),
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || 'AI generation failed');
+
+      setFormData((prev) => ({
+        ...prev,
+        title: data.content.title || prev.title,
+        subtitle: data.content.subtitle || prev.subtitle,
+        cta: data.content.cta || prev.cta,
+      }));
+      setAiTopic('');
+    } catch (err) {
+      setAiError(err.message || 'Generation failed. Try again.');
+    } finally {
+      setAiGenerating(false);
+    }
   };
 
   return (
@@ -82,6 +121,46 @@ export default function ReelGenerator({ user, profile }) {
                 </div>
 
                 <div className={styles.form}>
+                  {/* AI Generate block */}
+                  <div className={styles.aiGenBlock}>
+                    <div className={styles.aiGenHeader}>
+                      <span className={styles.aiGenIcon}>✨</span>
+                      <span className={styles.aiGenLabel}>Generate with AI</span>
+                    </div>
+                    <div className={styles.aiGenRow}>
+                      <input
+                        type="text"
+                        value={aiTopic}
+                        onChange={(e) => setAiTopic(e.target.value)}
+                        placeholder="Topic ya idea... e.g., 'morning skincare routine'"
+                        className={styles.aiGenInput}
+                        maxLength={120}
+                        disabled={aiGenerating}
+                        onKeyDown={(e) => e.key === 'Enter' && !aiGenerating && handleAiGenerate()}
+                      />
+                      <button
+                        onClick={handleAiGenerate}
+                        disabled={aiGenerating || !aiTopic.trim()}
+                        className={styles.aiGenBtn}
+                      >
+                        {aiGenerating ? (
+                          <>
+                            <span className={styles.aiSpinner}></span>
+                            Generating
+                          </>
+                        ) : (
+                          <>
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                              <path d="M7 1l1.5 4 4 1.5-4 1.5L7 12l-1.5-4-4-1.5 4-1.5L7 1z" stroke="currentColor" strokeWidth="1.25" strokeLinejoin="round" />
+                            </svg>
+                            Generate
+                          </>
+                        )}
+                      </button>
+                    </div>
+                    {aiError && <p className={styles.aiGenError}>{aiError}</p>}
+                  </div>
+
                   <div className={styles.field}>
                     <label className={styles.label}>Title / Hook</label>
                     <textarea
@@ -120,6 +199,9 @@ export default function ReelGenerator({ user, profile }) {
                       maxLength={60}
                     />
                   </div>
+
+                  {/* Logo Controls */}
+                  <LogoControls user={user} formData={formData} onChange={setFormData} />
 
                   <details className={styles.advancedToggle}>
                     <summary className={styles.advancedSummary}>

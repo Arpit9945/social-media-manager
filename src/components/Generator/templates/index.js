@@ -1,5 +1,4 @@
-// Reel Generator Templates Registry
-// Each template: { id, name, description, icon, category, supportsStatic, render(ctx, frame, totalFrames, progress, data) }
+// Reel Generator Templates Registry — 20 templates total
 
 import textReveal from './textReveal';
 import boldStatement from './boldStatement';
@@ -11,18 +10,46 @@ import statsBurst from './statsBurst';
 import storyStyle from './storyStyle';
 import brandReveal from './brandReveal';
 import ctaPush from './ctaPush';
+// New in 3.5
+import minimalClean from './minimalClean';
+import boldNumbers from './boldNumbers';
+import comparison from './comparison';
+import questionHook from './questionHook';
+import promoSale from './promoSale';
+import testimonial from './testimonial';
+import listicle from './listicle';
+import eventAnnouncement from './eventAnnouncement';
+import magazineCover from './magazineCover';
+import glowCard from './glowCard';
 
 export const TEMPLATES = [
-  textReveal,
+  // Hooks & openers
   boldStatement,
-  productShowcase,
-  quoteCard,
+  questionHook,
+  textReveal,
+  storyStyle,
+  // Educational
   tutorial,
   tipCard,
+  listicle,
+  comparison,
+  // Data & social proof
   statsBurst,
-  storyStyle,
+  boldNumbers,
+  testimonial,
+  // Branding
   brandReveal,
+  magazineCover,
+  glowCard,
+  // Product
+  productShowcase,
+  // Engagement & CTAs
+  promoSale,
+  eventAnnouncement,
   ctaPush,
+  // Quote / sophisticated
+  quoteCard,
+  minimalClean,
 ];
 
 export const TEMPLATES_BY_ID = TEMPLATES.reduce((acc, t) => {
@@ -45,5 +72,12 @@ export function getDefaultData(template, brandProfile) {
     primaryColor: brandProfile?.primary_color || '#8b5cf6',
     secondaryColor: brandProfile?.secondary_color || '#ec4899',
     accentColor: brandProfile?.accent_color || '#0a0a0b',
+    // Logo settings
+    logoUrl: brandProfile?.logo_url || null,
+    showLogo: !!brandProfile?.logo_url,
+    logoPosition: 'top-right',
+    logoSize: 110,
+    logoOpacity: 1,
+    logoBackground: 'pill', // 'pill' | 'circle' | 'none'
   };
 }

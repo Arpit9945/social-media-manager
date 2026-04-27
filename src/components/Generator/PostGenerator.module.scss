@@ -383,3 +383,92 @@
   color: $color-text-tertiary;
   margin: 0;
 }
+
+// =====================================
+// AI GENERATE BLOCK
+// =====================================
+.aiGenBlock {
+  padding: $space-4;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(236, 72, 153, 0.08));
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: $radius-lg;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.aiGenHeader {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+}
+
+.aiGenIcon { font-size: 1.125rem; line-height: 1; }
+
+.aiGenLabel {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  letter-spacing: $letter-spacing-snug;
+  background: $gradient-primary;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.aiGenRow { display: flex; gap: $space-2; }
+
+.aiGenInput {
+  flex: 1;
+  padding: $space-3 $space-4;
+  background: $color-bg-primary;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-md;
+  color: $color-text-primary;
+  font-size: $font-size-sm;
+  transition: all $transition-fast;
+
+  &::placeholder { color: $color-text-muted; }
+
+  &:focus {
+    outline: none;
+    border-color: $color-accent;
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+  }
+
+  &:disabled { opacity: 0.6; cursor: not-allowed; }
+}
+
+.aiGenBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-3 $space-4;
+  background: $gradient-primary;
+  color: white;
+  border: none;
+  border-radius: $radius-md;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  cursor: pointer;
+  transition: all $transition-fast;
+  white-space: nowrap;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: $shadow-glow;
+  }
+
+  &:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+}
+
+.aiSpinner {
+  width: 12px;
+  height: 12px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+.aiGenError { margin: 0; font-size: $font-size-xs; color: $color-error; }

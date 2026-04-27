@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { createClient } from '@/lib/supabase/client';
 import ToolHeader from '@/components/Shared/ToolHeader';
 import { getTemplateById } from './templates';
-import { REEL_WIDTH, REEL_HEIGHT } from '@/lib/reel/canvasEngine';
+import { REEL_WIDTH, REEL_HEIGHT, renderStaticFrame, loadLogo } from '@/lib/reel/canvasEngine';
 import styles from './Library.module.scss';
 
 function formatDate(dateString) {
@@ -35,16 +35,30 @@ function ItemThumbnail({ item }) {
     if (!template) return;
 
     const ctx = canvas.getContext('2d');
-    try {
-      if (template.renderStatic) {
-        template.renderStatic(ctx, item.template_data);
-      } else {
-        template.render(ctx, 360, 450, 0.8, item.template_data);
+    const data = item.template_data;
+
+    const draw = () => {
+      try {
+        renderStaticFrame(ctx, template, data);
+      } catch (err) {
+        ctx.fillStyle = data?.primaryColor || '#8b5cf6';
+        ctx.fillRect(0, 0, REEL_WIDTH, REEL_HEIGHT);
       }
-    } catch (err) {
-      // Fallback: solid color
-      ctx.fillStyle = item.template_data?.primaryColor || '#8b5cf6';
-      ctx.fillRect(0, 0, REEL_WIDTH, REEL_HEIGHT);
+    };
+
+    // Initial render (logo skipped if not cached yet)
+    draw();
+
+    // Preload logo if present, then re-render
+    if (data.logoUrl && data.showLogo !== false) {
+      let cancelled = false;
+      loadLogo(data.logoUrl).then((img) => {
+        if (cancelled || !img) return;
+        draw();
+      });
+      return () => {
+        cancelled = true;
+      };
     }
   }, [item]);
 

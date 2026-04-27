@@ -1,0 +1,373 @@
+.section {
+  background: $color-surface;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-md;
+  overflow: hidden;
+
+  &[open] .toggleIcon {
+    transform: rotate(180deg);
+  }
+}
+
+.summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $space-3 $space-4;
+  cursor: pointer;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  list-style: none;
+  user-select: none;
+
+  &::-webkit-details-marker { display: none; }
+
+  &:hover {
+    background: $color-surface-hover;
+  }
+}
+
+.summaryLeft {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+
+  svg {
+    color: $color-text-tertiary;
+  }
+}
+
+.activeChip {
+  font-size: 0.625rem;
+  font-weight: $font-weight-bold;
+  letter-spacing: $letter-spacing-wider;
+  padding: 2px 6px;
+  background: $color-success-bg;
+  color: $color-success;
+  border-radius: $radius-sm;
+}
+
+.toggleIcon {
+  color: $color-text-tertiary;
+  transition: transform $transition-base;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+  padding: $space-4;
+  border-top: 1px solid $color-border-subtle;
+}
+
+// Upload area
+.uploadArea {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.fileInput {
+  display: none;
+}
+
+.uploadBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $space-2;
+  padding: $space-6 $space-4;
+  background: $color-bg-primary;
+  border: 1px dashed $color-border-default;
+  border-radius: $radius-md;
+  color: $color-text-primary;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  svg {
+    color: $color-accent;
+  }
+
+  &:hover:not(:disabled) {
+    border-color: $color-accent;
+    background: $color-accent-subtle;
+  }
+
+  &:disabled {
+    cursor: wait;
+    opacity: 0.7;
+  }
+}
+
+.uploadHint {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  font-weight: $font-weight-regular;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+.preview {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  padding: $space-3;
+  background: $color-bg-primary;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-md;
+}
+
+.previewImg {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  background: white;
+  border-radius: $radius-sm;
+  border: 1px solid $color-border-subtle;
+  padding: 4px;
+}
+
+.previewActions {
+  display: flex;
+  gap: $space-2;
+  margin-left: auto;
+}
+
+.changeBtn,
+.removeBtn {
+  padding: $space-2 $space-3;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-md;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  background: transparent;
+  transition: all $transition-fast;
+}
+
+.changeBtn {
+  color: $color-text-primary;
+
+  &:hover {
+    border-color: $color-accent;
+    color: $color-accent;
+    background: $color-accent-subtle;
+  }
+}
+
+.removeBtn {
+  color: $color-text-tertiary;
+
+  &:hover {
+    border-color: $color-error;
+    color: $color-error;
+    background: $color-error-bg;
+  }
+}
+
+.error {
+  padding: $space-2 $space-3;
+  background: $color-error-bg;
+  color: $color-error;
+  font-size: $font-size-xs;
+  border-radius: $radius-md;
+  margin: 0;
+}
+
+// Toggle row
+.toggleRow {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  cursor: pointer;
+  user-select: none;
+}
+
+.toggleLabel {
+  flex: 1;
+  font-size: $font-size-sm;
+  color: $color-text-primary;
+  font-weight: $font-weight-medium;
+}
+
+.checkbox {
+  display: none;
+}
+
+.toggleSwitch {
+  position: relative;
+  width: 36px;
+  height: 20px;
+  background: $color-bg-tertiary;
+  border-radius: $radius-full;
+  transition: background $transition-fast;
+  flex-shrink: 0;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    background: white;
+    border-radius: 50%;
+    transition: transform $transition-base;
+  }
+}
+
+.checkbox:checked + .toggleSwitch {
+  background: $gradient-primary;
+
+  &::before {
+    transform: translateX(16px);
+  }
+}
+
+// Field
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.fieldLabel {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  color: $color-text-tertiary;
+  letter-spacing: $letter-spacing-wider;
+  text-transform: uppercase;
+}
+
+// Position picker - 2x3 grid showing visual position
+.positionGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-1;
+  padding: $space-2;
+  background: $color-bg-primary;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-md;
+  aspect-ratio: 9 / 6;
+  max-width: 200px;
+}
+
+.posBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  font-size: 0.625rem;
+  font-weight: $font-weight-bold;
+  color: $color-text-tertiary;
+  letter-spacing: $letter-spacing-wider;
+  transition: all $transition-fast;
+
+  &:hover {
+    border-color: $color-border-strong;
+    color: $color-text-primary;
+  }
+}
+
+.posActive {
+  background: $color-accent;
+  border-color: $color-accent;
+  color: white;
+
+  &:hover {
+    color: white;
+  }
+}
+
+// Slider
+.sliderHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sliderValue {
+  font-size: $font-size-xs;
+  color: $color-text-primary;
+  font-weight: $font-weight-medium;
+  font-variant-numeric: tabular-nums;
+}
+
+.slider {
+  width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  background: $color-bg-tertiary;
+  border-radius: $radius-full;
+  outline: none;
+  cursor: pointer;
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: $gradient-primary;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: $shadow-sm;
+  }
+
+  &::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background: $gradient-primary;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+}
+
+// Background picker
+.bgGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-2;
+}
+
+.bgBtn {
+  padding: $space-2;
+  background: $color-bg-primary;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-md;
+  color: $color-text-secondary;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    border-color: $color-border-strong;
+    color: $color-text-primary;
+  }
+}
+
+.bgActive {
+  background: $color-accent-subtle;
+  border-color: $color-accent;
+  color: $color-accent;
+
+  &:hover {
+    color: $color-accent;
+  }
+}

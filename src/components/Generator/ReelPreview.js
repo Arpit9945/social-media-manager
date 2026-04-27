@@ -2,6 +2,7 @@
 
 import { useRef, useEffect, useState } from 'react';
 import { TOTAL_FRAMES, FPS, renderFrame } from '@/lib/reel/canvasEngine';
+import { useLogoPreload } from '@/lib/reel/useLogoPreload';
 import styles from './ReelPreview.module.scss';
 
 export default function ReelPreview({ template, data }) {
@@ -10,6 +11,9 @@ export default function ReelPreview({ template, data }) {
   const startTimeRef = useRef(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const [currentFrame, setCurrentFrame] = useState(0);
+
+  // Preload logo before rendering
+  const logoState = useLogoPreload(data?.showLogo ? data?.logoUrl : null);
 
   // Render specific frame
   const renderAt = (frame) => {
@@ -50,7 +54,7 @@ export default function ReelPreview({ template, data }) {
       renderAt(currentFrame);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data, template]);
+  }, [data, template, logoState.ready]);
 
   const togglePlay = () => setIsPlaying(!isPlaying);
 
