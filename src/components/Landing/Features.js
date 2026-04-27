@@ -76,7 +76,7 @@ export default function Features() {
           <h2 className={styles.title}>
             Everything you need.
             <br />
-            <span className={styles.muted}>Nothing you don't.</span>
+            <span className={styles.muted}>Nothing you don&apos;t.</span>
           </h2>
           <p className={styles.subtitle}>
             Six powerful tools, one focused mission: helping you grow on Instagram without the overwhelm.

@@ -42,7 +42,7 @@ export default function StepAudience({ data, updateData }) {
       <div className={styles.fields}>
         <div className={styles.field}>
           <label className={styles.label}>
-            What's your category? <span className={styles.required}>*</span>
+            What&apos;s your category? <span className={styles.required}>*</span>
           </label>
           <div className={styles.categoryGrid}>
             {CATEGORIES.map((cat) => (

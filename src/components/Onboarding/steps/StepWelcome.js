@@ -25,7 +25,7 @@ export default function StepWelcome({ onNext, userName }) {
       </h1>
 
       <p className={styles.description}>
-        Let's set up your brand profile. This helps ASMA generate content that
+        Let&apos;s set up your brand profile. This helps ASMA generate content that
         actually sounds like <em>you</em> — not generic AI fluff.
       </p>
 
@@ -54,7 +54,7 @@ export default function StepWelcome({ onNext, userName }) {
       </div>
 
       <button onClick={onNext} className={styles.startButton}>
-        Let's start
+        Let&apos;s start
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
           <path d="M5 3l4 4-4 4" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
         </svg>

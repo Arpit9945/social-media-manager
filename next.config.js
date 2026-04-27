@@ -23,7 +23,7 @@ const nextConfig = {
     includePaths: [path.join(__dirname, 'src/styles')],
     additionalData: `@use "abstracts/variables" as *; @use "abstracts/mixins" as *;`,
     api: 'modern-compiler',
-    silenceDeprecations: ['legacy-js-api', 'mixed-decls', 'color-functions', 'global-builtin', 'import'],
+    silenceDeprecations: ['legacy-js-api', 'color-functions', 'global-builtin', 'import'],
   },
 
   // Performance: smarter package imports

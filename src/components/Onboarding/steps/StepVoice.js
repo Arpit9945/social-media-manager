@@ -98,9 +98,9 @@ export default function StepVoice({ data, updateData }) {
       </div>
 
       <div className={styles.summary}>
-        <h3 className={styles.summaryTitle}>You're all set!</h3>
+        <h3 className={styles.summaryTitle}>You&apos;re all set!</h3>
         <p className={styles.summaryText}>
-          Click "Complete setup" below and your dashboard will be ready.
+          Click &ldquo;Complete setup&rdquo; below and your dashboard will be ready.
         </p>
       </div>
     </div>

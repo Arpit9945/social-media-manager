@@ -138,7 +138,7 @@ export default function ReelAnalyzer({ user, profile }) {
                   placeholder="https://instagram.com/reel/..."
                   className={styles.input}
                 />
-                <p className={styles.helpText}>For your reference only — we don't fetch from Instagram</p>
+                <p className={styles.helpText}>For your reference only — we don&apos;t fetch from Instagram</p>
               </div>
 
               <div className={styles.field}>

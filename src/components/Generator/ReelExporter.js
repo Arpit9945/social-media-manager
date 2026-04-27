@@ -268,7 +268,7 @@ export default function ReelExporter({ template, data, user, onBack }) {
       <div className={styles.tipsBox}>
         <h3 className={styles.tipsTitle}>💡 Tips</h3>
         <ul className={styles.tipsList}>
-          <li>Don't close this tab while exporting — it cancels the render.</li>
+          <li>Don&apos;t close this tab while exporting — it cancels the render.</li>
           <li>For Instagram, upload the WebM directly. For WhatsApp/Status, GIF works better.</li>
           <li>Each export saves to your library — access it from the dashboard anytime.</li>
         </ul>
