@@ -1,0 +1,640 @@
+.report {
+  animation: slideUp 0.4s $ease-out both;
+}
+
+// =====================================
+// HEADER
+// =====================================
+.reportHeader {
+  margin-bottom: $space-8;
+  padding-bottom: $space-6;
+  border-bottom: 1px solid $color-border-subtle;
+}
+
+.headerTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: $space-4;
+  margin-bottom: $space-5;
+}
+
+.reportLabel {
+  display: inline-block;
+  font-size: 0.6875rem;
+  font-weight: $font-weight-semibold;
+  color: $color-success;
+  letter-spacing: $letter-spacing-wider;
+  text-transform: uppercase;
+  margin-bottom: $space-2;
+  padding: $space-1 $space-3;
+  background: $color-success-bg;
+  border-radius: $radius-full;
+}
+
+.reportTitle {
+  font-family: $font-display;
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-semibold;
+  letter-spacing: $letter-spacing-tightest;
+  line-height: 1.2;
+  color: $color-text-primary;
+  margin: 0;
+
+  @include md {
+    font-size: $font-size-3xl;
+  }
+}
+
+.keyTakeaway {
+  padding: $space-4;
+  background: $color-accent-subtle;
+  border: 1px solid $color-border-accent;
+  border-radius: $radius-md;
+  margin-bottom: $space-5;
+}
+
+.takeawayLabel {
+  display: block;
+  font-size: 0.6875rem;
+  font-weight: $font-weight-semibold;
+  color: $color-accent;
+  letter-spacing: $letter-spacing-wider;
+  text-transform: uppercase;
+  margin-bottom: $space-1;
+}
+
+.takeawayText {
+  font-size: $font-size-md;
+  color: $color-text-primary;
+  line-height: $line-height-relaxed;
+  margin: 0;
+  letter-spacing: $letter-spacing-snug;
+}
+
+.reportActions {
+  display: flex;
+  gap: $space-2;
+  flex-wrap: wrap;
+}
+
+.newBtn,
+.historyBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-2 $space-4;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  letter-spacing: $letter-spacing-snug;
+  border-radius: $radius-full;
+  cursor: pointer;
+  transition: all $transition-fast;
+  border: 1px solid $color-border-default;
+  background: $color-surface;
+  color: $color-text-primary;
+  text-decoration: none;
+
+  &:hover {
+    border-color: $color-border-strong;
+    background: $color-surface-hover;
+    transform: translateY(-1px);
+  }
+}
+
+// =====================================
+// SCORE BADGE
+// =====================================
+.scoreBadge {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2px;
+  padding: $space-2 $space-3;
+  border-radius: $radius-md;
+  font-family: $font-display;
+  font-weight: $font-weight-bold;
+  letter-spacing: $letter-spacing-tight;
+  flex-shrink: 0;
+}
+
+.scoreBadge_md {
+  padding: $space-2 $space-3;
+  
+  .scoreNumber { font-size: $font-size-xl; }
+  .scoreOf { font-size: $font-size-xs; }
+}
+
+.scoreBadge_lg {
+  padding: $space-3 $space-5;
+
+  .scoreNumber { font-size: $font-size-3xl; }
+  .scoreOf { font-size: $font-size-sm; }
+}
+
+.scoreNumber {
+  line-height: 1;
+}
+
+.scoreOf {
+  opacity: 0.6;
+  font-weight: $font-weight-medium;
+}
+
+.score_green {
+  background: $color-success-bg;
+  color: $color-success;
+  border: 1px solid $color-success;
+}
+
+.score_yellow {
+  background: $color-warning-bg;
+  color: $color-warning;
+  border: 1px solid $color-warning;
+}
+
+.score_red {
+  background: $color-error-bg;
+  color: $color-error;
+  border: 1px solid $color-error;
+}
+
+// =====================================
+// TABS
+// =====================================
+.tabsWrapper {
+  position: sticky;
+  top: 60px;
+  background: $color-bg-primary;
+  z-index: 5;
+  margin-bottom: $space-6;
+  padding: $space-3 0;
+  
+  @include md {
+    top: 64px;
+  }
+}
+
+.tabs {
+  display: flex;
+  gap: $space-1;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 4px;
+  background: $color-surface;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-full;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.tab {
+  padding: $space-2 $space-4;
+  background: transparent;
+  border: none;
+  color: $color-text-secondary;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  letter-spacing: $letter-spacing-snug;
+  border-radius: $radius-full;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all $transition-fast;
+
+  &:hover:not(.tabActive) {
+    color: $color-text-primary;
+  }
+}
+
+.tabActive {
+  background: $color-bg-primary;
+  color: $color-text-primary;
+  box-shadow: $shadow-sm;
+}
+
+// =====================================
+// TAB CONTENT
+// =====================================
+.tabContent {
+  animation: fadeIn 0.25s $ease-out both;
+}
+
+// Overview tab
+.overviewTab {
+  display: flex;
+  flex-direction: column;
+  gap: $space-5;
+}
+
+.viralCard {
+  padding: $space-6;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(236, 72, 153, 0.08));
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: $radius-xl;
+}
+
+.viralHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: $space-4;
+  margin-bottom: $space-3;
+}
+
+.cardLabel {
+  display: block;
+  font-size: 0.6875rem;
+  font-weight: $font-weight-semibold;
+  color: $color-text-tertiary;
+  letter-spacing: $letter-spacing-wider;
+  text-transform: uppercase;
+  margin-bottom: $space-1;
+}
+
+.cardTitle {
+  font-family: $font-display;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  letter-spacing: $letter-spacing-tight;
+  color: $color-text-primary;
+  margin: 0;
+}
+
+.viralReasoning {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  line-height: $line-height-relaxed;
+  margin-bottom: $space-5;
+  letter-spacing: $letter-spacing-snug;
+}
+
+.factorsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-3;
+
+  @include sm {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.factor {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.factorHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.factorLabel {
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+  font-weight: $font-weight-medium;
+  letter-spacing: $letter-spacing-snug;
+}
+
+.factorValue {
+  font-size: $font-size-xs;
+  color: $color-text-primary;
+  font-weight: $font-weight-semibold;
+}
+
+.scoreBar {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: $radius-full;
+  overflow: hidden;
+}
+
+.scoreFill {
+  height: 100%;
+  border-radius: $radius-full;
+  transition: width $transition-slow;
+}
+
+.fill_green { background: linear-gradient(90deg, #10b981, #14b8a6); }
+.fill_yellow { background: linear-gradient(90deg, #f59e0b, #f97316); }
+.fill_red { background: linear-gradient(90deg, #ef4444, #f43f5e); }
+.fill_violet { background: $gradient-primary; }
+
+// Summary grid
+.summaryGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $space-3;
+
+  @include sm {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.summaryCard {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+  padding: $space-4;
+  background: $color-surface;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-md;
+  transition: border-color $transition-fast;
+
+  &:hover {
+    border-color: $color-border-strong;
+  }
+}
+
+.summaryIcon {
+  font-size: 1.25rem;
+  margin-bottom: $space-1;
+}
+
+.summaryLabel {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  text-transform: uppercase;
+  letter-spacing: $letter-spacing-wider;
+  font-weight: $font-weight-semibold;
+}
+
+.summaryScore {
+  font-family: $font-display;
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  color: $color-text-primary;
+  letter-spacing: $letter-spacing-tight;
+}
+
+.summaryStatus {
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+  text-transform: capitalize;
+}
+
+// =====================================
+// DETAIL TABS
+// =====================================
+.detailTab {
+  display: flex;
+  flex-direction: column;
+  gap: $space-5;
+  padding: $space-6;
+  background: $color-surface;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-xl;
+}
+
+.detailHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-4;
+}
+
+.detailTitle {
+  font-family: $font-display;
+  font-size: $font-size-xl;
+  font-weight: $font-weight-semibold;
+  letter-spacing: $letter-spacing-tight;
+  color: $color-text-primary;
+  margin: 0;
+
+  @include md {
+    font-size: $font-size-2xl;
+  }
+}
+
+.detailDescription {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  line-height: $line-height-relaxed;
+  margin: 0;
+}
+
+.metaChips {
+  display: flex;
+  gap: $space-2;
+  flex-wrap: wrap;
+}
+
+.statusChip {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-1;
+  padding: $space-2 $space-3;
+  background: $color-bg-tertiary;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-full;
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+  text-transform: capitalize;
+
+  strong {
+    color: $color-text-primary;
+    font-weight: $font-weight-semibold;
+  }
+}
+
+.detailSection {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.detailSubtitle {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin: 0;
+  letter-spacing: $letter-spacing-snug;
+}
+
+.detailText {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  line-height: $line-height-relaxed;
+  margin: 0;
+  letter-spacing: $letter-spacing-snug;
+}
+
+.bulletList {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  margin: 0;
+  padding-left: $space-5;
+
+  li {
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+    line-height: $line-height-relaxed;
+    letter-spacing: $letter-spacing-snug;
+  }
+}
+
+// =====================================
+// IMPROVED VERSION
+// =====================================
+.improvedCard {
+  background: $color-bg-primary;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.improvedHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $space-3 $space-4;
+  background: $color-bg-tertiary;
+  border-bottom: 1px solid $color-border-subtle;
+}
+
+.improvedLabel {
+  font-size: 0.6875rem;
+  font-weight: $font-weight-semibold;
+  color: $color-text-tertiary;
+  letter-spacing: $letter-spacing-wider;
+  text-transform: uppercase;
+}
+
+.copyBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-1;
+  padding: $space-1 $space-3;
+  background: $color-surface;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-full;
+  color: $color-text-primary;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: $color-surface-hover;
+    border-color: $color-border-strong;
+  }
+}
+
+.improvedText {
+  padding: $space-4;
+  font-size: $font-size-sm;
+  color: $color-text-primary;
+  line-height: $line-height-relaxed;
+  margin: 0;
+  white-space: pre-wrap;
+  letter-spacing: $letter-spacing-snug;
+
+  @include md {
+    font-size: $font-size-base;
+  }
+}
+
+.copyAllBtn {
+  @include button-base;
+  width: 100%;
+  height: 44px;
+  background: $gradient-primary;
+  color: white;
+  border-radius: $radius-full;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  letter-spacing: $letter-spacing-snug;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: $shadow-glow;
+  }
+}
+
+// =====================================
+// ACTION ITEMS
+// =====================================
+.actionsList {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.actionCard {
+  padding: $space-4;
+  background: $color-bg-primary;
+  border: 1px solid $color-border-default;
+  border-left-width: 3px;
+  border-radius: $radius-md;
+  transition: border-color $transition-fast;
+
+  &:hover {
+    border-color: $color-border-strong;
+  }
+}
+
+.priority_high {
+  border-left-color: $color-error;
+}
+
+.priority_medium {
+  border-left-color: $color-warning;
+}
+
+.priority_low {
+  border-left-color: $color-info;
+}
+
+.actionHeader {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  margin-bottom: $space-2;
+}
+
+.priorityBadge {
+  font-size: 0.625rem;
+  font-weight: $font-weight-semibold;
+  text-transform: uppercase;
+  letter-spacing: $letter-spacing-wider;
+  padding: 2px 8px;
+  border-radius: $radius-sm;
+}
+
+.badge_high {
+  background: $color-error-bg;
+  color: $color-error;
+  border: 1px solid $color-error;
+}
+
+.badge_medium {
+  background: $color-warning-bg;
+  color: $color-warning;
+  border: 1px solid $color-warning;
+}
+
+.badge_low {
+  background: $color-info-bg;
+  color: $color-info;
+  border: 1px solid $color-info;
+}
+
+.actionArea {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  text-transform: capitalize;
+  font-weight: $font-weight-medium;
+}
+
+.actionText {
+  font-size: $font-size-sm;
+  color: $color-text-primary;
+  line-height: $line-height-relaxed;
+  margin: 0;
+  letter-spacing: $letter-spacing-snug;
+}

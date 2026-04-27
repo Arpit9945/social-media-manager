@@ -1,0 +1,620 @@
+.page {
+  min-height: 100vh;
+  background: $color-bg-primary;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: $z-sticky;
+  background: rgba(10, 10, 11, 0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid $color-border-subtle;
+}
+
+.headerInner {
+  @include container;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  @include md {
+    height: 68px;
+  }
+}
+
+.logoLink {
+  display: flex;
+  align-items: center;
+  color: $color-text-primary;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  font-weight: $font-weight-medium;
+  letter-spacing: $letter-spacing-snug;
+  transition: color $transition-fast;
+
+  &:hover {
+    color: $color-text-primary;
+  }
+}
+
+.main {
+  @include container;
+  padding: $space-10 $space-4;
+
+  @include md {
+    padding: $space-12 $space-6;
+  }
+}
+
+.titleBlock {
+  margin-bottom: $space-8;
+
+  @include md {
+    margin-bottom: $space-10;
+  }
+}
+
+.title {
+  font-family: $font-display;
+  font-size: $font-size-3xl;
+  font-weight: $font-weight-semibold;
+  letter-spacing: $letter-spacing-tightest;
+  color: $color-text-primary;
+  margin-bottom: $space-2;
+
+  @include md {
+    font-size: $font-size-4xl;
+  }
+}
+
+.subtitle {
+  font-size: $font-size-md;
+  color: $color-text-secondary;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-6;
+
+  @include lg {
+    grid-template-columns: 220px 1fr;
+    gap: $space-10;
+  }
+}
+
+.sidebar {
+  position: sticky;
+  top: 80px;
+  align-self: start;
+}
+
+.tabs {
+  display: flex;
+  gap: $space-1;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+
+  @include lg {
+    flex-direction: column;
+    overflow: visible;
+  }
+}
+
+.tab {
+  padding: $space-3 $space-4;
+  background: transparent;
+  border: none;
+  color: $color-text-secondary;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  letter-spacing: $letter-spacing-snug;
+  border-radius: $radius-md;
+  cursor: pointer;
+  transition: all $transition-fast;
+  white-space: nowrap;
+  text-align: left;
+
+  @include lg {
+    width: 100%;
+  }
+
+  &:hover {
+    color: $color-text-primary;
+    background: $color-surface;
+  }
+}
+
+.tabActive {
+  color: $color-text-primary;
+  background: $color-surface;
+}
+
+.content {
+  background: $color-surface;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-xl;
+  padding: $space-6;
+
+  @include md {
+    padding: $space-8;
+  }
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: $space-5;
+}
+
+.sectionTitle {
+  font-family: $font-display;
+  font-size: $font-size-xl;
+  font-weight: $font-weight-semibold;
+  letter-spacing: $letter-spacing-tight;
+  color: $color-text-primary;
+  margin-bottom: $space-2;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.label {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  letter-spacing: $letter-spacing-snug;
+}
+
+.input,
+.textarea,
+.select {
+  width: 100%;
+  padding: $space-3 $space-4;
+  background: $color-bg-primary;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-md;
+  color: $color-text-primary;
+  font-size: $font-size-base;
+  font-family: $font-sans;
+  transition: border-color $transition-fast;
+
+  &:focus {
+    outline: none;
+    border-color: $color-accent;
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+  }
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M3 5l3 3 3-3' stroke='%23a1a1aa' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right $space-4 center;
+  padding-right: $space-10;
+}
+
+// Logo
+.logoPreview {
+  display: flex;
+  align-items: center;
+  gap: $space-4;
+  padding: $space-4;
+  background: $color-bg-primary;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-md;
+}
+
+.logoImage {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  background: $color-bg-tertiary;
+  border-radius: $radius-sm;
+  padding: $space-2;
+}
+
+.removeBtn {
+  padding: $space-2 $space-3;
+  background: transparent;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-sm;
+  color: $color-text-secondary;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  margin-left: auto;
+
+  &:hover {
+    color: $color-error;
+    border-color: $color-error;
+  }
+}
+
+.uploadBox {
+  padding: $space-5;
+  background: $color-bg-primary;
+  border: 1.5px dashed $color-border-default;
+  border-radius: $radius-md;
+  cursor: pointer;
+  text-align: center;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  transition: all $transition-fast;
+
+  &:hover {
+    border-color: $color-accent;
+    background: $color-accent-subtle;
+    color: $color-text-primary;
+  }
+}
+
+.fileInput {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+// Color preview
+.colorPreview {
+  height: 100px;
+  border-radius: $radius-lg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: $font-display;
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  color: white;
+  letter-spacing: $letter-spacing-tight;
+  border: 1px solid $color-border-default;
+}
+
+.presetGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $space-2;
+
+  @include sm {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.presetBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-3;
+  background: $color-bg-primary;
+  border: 1.5px solid $color-border-default;
+  border-radius: $radius-md;
+  cursor: pointer;
+  transition: all $transition-fast;
+  font-size: 0.6875rem;
+  color: $color-text-secondary;
+
+  &:hover {
+    border-color: $color-border-strong;
+  }
+}
+
+.presetSelected {
+  border-color: $color-accent;
+  background: $color-accent-subtle;
+  color: $color-text-primary;
+}
+
+.presetSwatch {
+  width: 100%;
+  height: 32px;
+  border-radius: $radius-sm;
+}
+
+.colorRow {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-4;
+
+  @include sm {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.colorInputWrapper {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-2;
+  background: $color-bg-primary;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-md;
+}
+
+.colorInput {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: none;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  background: transparent;
+
+  &::-webkit-color-swatch-wrapper { padding: 0; }
+  &::-webkit-color-swatch {
+    border: 1px solid $color-border-default;
+    border-radius: $radius-sm;
+  }
+}
+
+.colorHex {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: $color-text-primary;
+  font-family: $font-mono;
+  outline: none;
+  text-transform: uppercase;
+}
+
+// Sliders
+.sliderRow {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  margin-bottom: $space-3;
+}
+
+.sliderLabel {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  width: 30px;
+}
+
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  flex: 1;
+  height: 4px;
+  background: $color-bg-tertiary;
+  border-radius: $radius-full;
+  outline: none;
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    background: white;
+    border: 2px solid $color-accent;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  &::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    background: white;
+    border: 2px solid $color-accent;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+}
+
+// Option row
+.optionRow {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-2;
+
+  @include sm {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.optionBtn {
+  padding: $space-3 $space-4;
+  background: $color-bg-primary;
+  border: 1.5px solid $color-border-default;
+  border-radius: $radius-md;
+  color: $color-text-primary;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+
+  &:hover {
+    border-color: $color-border-strong;
+  }
+}
+
+.optionSelected {
+  border-color: $color-accent;
+  background: $color-accent-subtle;
+}
+
+// Tone
+.toneList {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.toneBtn {
+  padding: $space-3 $space-4;
+  background: $color-bg-primary;
+  border: 1.5px solid $color-border-default;
+  border-radius: $radius-md;
+  color: $color-text-primary;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  text-align: left;
+
+  &:hover {
+    border-color: $color-border-strong;
+  }
+}
+
+.toneSelected {
+  border-color: $color-accent;
+  background: $color-accent-subtle;
+}
+
+// Handle
+.handleInput {
+  display: flex;
+  align-items: center;
+  background: $color-bg-primary;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-md;
+
+  &:focus-within {
+    border-color: $color-accent;
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+  }
+
+  .input {
+    border: none;
+    background: transparent;
+
+    &:focus {
+      box-shadow: none;
+    }
+  }
+}
+
+.handlePrefix {
+  padding-left: $space-4;
+  color: $color-text-tertiary;
+  font-weight: $font-weight-medium;
+}
+
+// Account
+.accountInfo {
+  background: $color-bg-primary;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.accountRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $space-4;
+  border-bottom: 1px solid $color-border-subtle;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.accountLabel {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+}
+
+.accountValue {
+  font-size: $font-size-sm;
+  color: $color-text-primary;
+  font-weight: $font-weight-medium;
+}
+
+.dangerZone {
+  margin-top: $space-6;
+  padding: $space-5;
+  background: $color-bg-primary;
+  border: 1px solid $color-error;
+  border-radius: $radius-md;
+}
+
+.dangerTitle {
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin: 0 0 $space-2;
+}
+
+.dangerText {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  margin: 0 0 $space-3;
+}
+
+.signOutBtn {
+  @include button-base;
+  padding: $space-2 $space-4;
+  background: transparent;
+  border: 1px solid $color-error;
+  border-radius: $radius-md;
+  color: $color-error;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+
+  &:hover {
+    background: $color-error;
+    color: white;
+  }
+}
+
+// Save bar
+.saveBar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: $space-3;
+  margin-top: $space-6;
+  padding-top: $space-5;
+  border-top: 1px solid $color-border-subtle;
+}
+
+.errorMsg {
+  font-size: $font-size-sm;
+  color: $color-error;
+}
+
+.successMsg {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-1;
+  font-size: $font-size-sm;
+  color: $color-success;
+}
+
+.saveBtn {
+  @include button-base;
+  padding: 0 $space-5;
+  height: 40px;
+  background: $color-text-primary;
+  color: $color-bg-primary;
+  border-radius: $radius-full;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
+  }
+}

@@ -1,0 +1,4 @@
+// Order matters: abstracts -> base -> layouts -> components
+
+@use 'base/reset';
+@use 'base/global';

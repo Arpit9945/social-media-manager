@@ -1,0 +1,133 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.bgGlow {
+  position: absolute;
+  top: -200px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 800px;
+  background: $gradient-mesh;
+  filter: blur(80px);
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.logoLink {
+  display: inline-flex;
+  align-items: center;
+  padding: $space-5 $space-6;
+  color: $color-text-primary;
+  position: relative;
+  z-index: 1;
+  align-self: flex-start;
+
+  @include md {
+    padding: $space-7 $space-8;
+  }
+
+  &:hover {
+    opacity: 0.85;
+  }
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: $space-6;
+  position: relative;
+  z-index: 1;
+}
+
+.card {
+  width: 100%;
+  max-width: 420px;
+  padding: $space-8;
+  background: $color-surface;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-2xl;
+  backdrop-filter: blur(12px);
+  animation: scaleIn 0.5s $ease-out both;
+
+  @include md {
+    padding: $space-10;
+  }
+}
+
+.header {
+  text-align: center;
+  margin-bottom: $space-7;
+}
+
+.title {
+  font-family: $font-display;
+  font-size: $font-size-3xl;
+  font-weight: $font-weight-semibold;
+  letter-spacing: $letter-spacing-tightest;
+  line-height: $line-height-tight;
+  color: $color-text-primary;
+  margin-bottom: $space-2;
+}
+
+.subtitle {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  line-height: $line-height-relaxed;
+  letter-spacing: $letter-spacing-snug;
+}
+
+.footer {
+  margin-top: $space-6;
+  padding-top: $space-5;
+  border-top: 1px solid $color-border-subtle;
+}
+
+.terms {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  text-align: center;
+  line-height: $line-height-relaxed;
+
+  a {
+    color: $color-text-secondary;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+
+    &:hover {
+      color: $color-accent;
+    }
+  }
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  margin-top: $space-6;
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+  transition: color $transition-fast;
+  letter-spacing: $letter-spacing-snug;
+
+  &:hover {
+    color: $color-text-primary;
+
+    svg {
+      transform: translateX(-2px);
+    }
+  }
+
+  svg {
+    transition: transform $transition-base;
+  }
+}

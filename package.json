@@ -1,0 +1,25 @@
+{
+  "name": "asma-app",
+  "version": "0.3.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "postinstall": "node -e \"const fs=require('fs');const path=require('path');try{const src=path.join('node_modules','gif.js','dist','gif.worker.js');const dest=path.join('public','gif.worker.js');if(fs.existsSync(src)){fs.copyFileSync(src,dest);console.log('Copied gif.worker.js to public/');}}catch(e){console.log('gif.worker.js copy skipped:',e.message);}\""
+  },
+  "dependencies": {
+    "@supabase/ssr": "^0.5.2",
+    "@supabase/supabase-js": "^2.45.4",
+    "next": "15.0.3",
+    "react": "19.0.0-rc-66855b96-20241106",
+    "react-dom": "19.0.0-rc-66855b96-20241106",
+    "gif.js": "^0.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^9",
+    "eslint-config-next": "15.0.3",
+    "sass": "^1.80.6"
+  }
+}

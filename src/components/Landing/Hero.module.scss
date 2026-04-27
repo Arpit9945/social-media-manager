@@ -1,0 +1,504 @@
+.hero {
+  position: relative;
+  padding: calc(#{$header-height-mobile} + #{$space-12}) 0 $space-12;
+  overflow: hidden;
+
+  @include md {
+    padding: calc(#{$header-height} + #{$space-16}) 0 $space-20;
+  }
+}
+
+.bgGrid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
+  pointer-events: none;
+}
+
+.bgGlow {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 600px;
+  background: $gradient-mesh;
+  filter: blur(60px);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.container {
+  @include container;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-12;
+  align-items: center;
+
+  @include lg {
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: $space-8;
+  }
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+
+  @include lg {
+    text-align: left;
+  }
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-2 $space-4;
+  background: $color-surface;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-full;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  letter-spacing: $letter-spacing-snug;
+  color: $color-text-secondary;
+  margin-bottom: $space-6;
+  animation: slideUp 0.6s $ease-out both;
+}
+
+.badgeDot {
+  width: 6px;
+  height: 6px;
+  background: $color-success;
+  border-radius: 50%;
+  box-shadow: 0 0 8px $color-success;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.title {
+  font-family: $font-display;
+  font-size: $font-size-hero;
+  font-weight: $font-weight-semibold;
+  letter-spacing: $letter-spacing-tightest;
+  line-height: 1.05;
+  margin-bottom: $space-5;
+  color: $color-text-primary;
+  animation: slideUp 0.8s $ease-out 0.1s both;
+  // Add padding to prevent italic clipping
+  padding-right: 0.05em;
+}
+
+.italic {
+  font-family: $font-serif;
+  font-style: italic;
+  font-weight: 400;
+  background: $gradient-primary;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  // Prevent italic clipping
+  padding-right: 0.08em;
+  display: inline-block;
+}
+
+.subtitle {
+  font-size: $font-size-md;
+  color: $color-text-secondary;
+  max-width: 540px;
+  margin: 0 auto $space-8;
+  line-height: $line-height-relaxed;
+  letter-spacing: $letter-spacing-snug;
+  animation: slideUp 0.8s $ease-out 0.2s both;
+
+  @include md {
+    font-size: $font-size-lg;
+  }
+
+  @include lg {
+    margin: 0 0 $space-8;
+  }
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-3;
+  margin-bottom: $space-10;
+  animation: slideUp 0.8s $ease-out 0.3s both;
+
+  @include sm {
+    flex-direction: row;
+    gap: $space-3;
+  }
+
+  @include lg {
+    justify-content: flex-start;
+  }
+}
+
+.primaryCta {
+  @include button-base;
+  padding: 0 $space-6;
+  height: 44px;
+  background: $color-text-primary;
+  color: $color-bg-primary;
+  border-radius: $radius-full;
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+  letter-spacing: $letter-spacing-snug;
+  width: 100%;
+
+  @include sm {
+    width: auto;
+  }
+
+  svg {
+    transition: transform $transition-base;
+  }
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(255, 255, 255, 0.12);
+
+    svg {
+      transform: translateX(2px);
+    }
+  }
+}
+
+.secondaryCta {
+  @include button-base;
+  padding: 0 $space-6;
+  height: 44px;
+  background: transparent;
+  color: $color-text-primary;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-full;
+  font-size: $font-size-base;
+  font-weight: $font-weight-medium;
+  letter-spacing: $letter-spacing-snug;
+  width: 100%;
+
+  @include sm {
+    width: auto;
+  }
+
+  &:hover {
+    border-color: $color-border-strong;
+    background: $color-surface;
+  }
+}
+
+.socialProof {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  justify-content: center;
+  animation: slideUp 0.8s $ease-out 0.4s both;
+
+  @include lg {
+    justify-content: flex-start;
+  }
+}
+
+.avatars {
+  display: flex;
+}
+
+.avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid $color-bg-primary;
+  margin-left: -8px;
+
+  &:first-child {
+    margin-left: 0;
+  }
+}
+
+.proofText {
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+  margin: 0;
+
+  strong {
+    color: $color-text-primary;
+    font-weight: $font-weight-semibold;
+  }
+}
+
+// =====================================
+// VISUAL / PHONE MOCKUP
+// =====================================
+.visual {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: $space-12 0;
+
+  @include mobile-only {
+    padding: $space-8 0 $space-4;
+  }
+}
+
+.visualInner {
+  position: relative;
+  width: 280px;
+  animation: scaleIn 0.9s $ease-out 0.4s both;
+
+  @include md {
+    width: 300px;
+  }
+}
+
+.phoneMockup {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 280 / 580;
+  background: #0a0a0b;
+  border: 6px solid #1f1f23;
+  border-radius: 38px;
+  box-shadow: 
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    0 30px 80px rgba(0, 0, 0, 0.6),
+    0 0 60px rgba(139, 92, 246, 0.15);
+  overflow: hidden;
+}
+
+.phoneNotch {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 22px;
+  background: #0a0a0b;
+  border-radius: 14px;
+  z-index: 2;
+}
+
+.phoneScreen {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, #0a0a0b 0%, #111113 100%);
+  padding: $space-10 $space-3 $space-3;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.appHeader {
+  margin-bottom: $space-1;
+  padding: 0 $space-1;
+}
+
+.appLogo {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+
+  span {
+    font-family: $font-display;
+    font-size: 0.875rem;
+    font-weight: $font-weight-semibold;
+    letter-spacing: $letter-spacing-tight;
+    color: $color-text-primary;
+  }
+}
+
+.analysisCard,
+.captionCard,
+.suggestionCard {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid $color-border-subtle;
+  border-radius: $radius-lg;
+  padding: $space-3;
+  backdrop-filter: blur(8px);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $space-3;
+}
+
+.cardLabel {
+  font-size: 0.6875rem;
+  color: $color-text-tertiary;
+  text-transform: uppercase;
+  letter-spacing: $letter-spacing-wider;
+  font-weight: $font-weight-semibold;
+}
+
+.cardScore {
+  font-family: $font-display;
+  font-size: 1rem;
+  font-weight: $font-weight-bold;
+  background: $gradient-primary;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.cardMetrics {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.metric {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+}
+
+.metricLabel {
+  font-size: 0.6875rem;
+  color: $color-text-secondary;
+  width: 50px;
+  font-weight: $font-weight-medium;
+}
+
+.metricBar {
+  flex: 1;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: $radius-full;
+  overflow: hidden;
+}
+
+.metricFill {
+  height: 100%;
+  border-radius: $radius-full;
+}
+
+.captionText {
+  font-size: 0.75rem;
+  color: $color-text-primary;
+  line-height: $line-height-relaxed;
+  margin-bottom: $space-2;
+  font-weight: $font-weight-medium;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-1;
+}
+
+.tag {
+  font-size: 0.625rem;
+  color: $color-accent;
+  background: $color-accent-subtle;
+  padding: 2px $space-2;
+  border-radius: $radius-sm;
+  font-weight: $font-weight-medium;
+}
+
+.suggestionCard {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+}
+
+.suggestionDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: $color-success;
+  box-shadow: 0 0 8px $color-success;
+  flex-shrink: 0;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.suggestionTitle {
+  font-size: 0.75rem;
+  color: $color-text-primary;
+  font-weight: $font-weight-semibold;
+  margin: 0;
+}
+
+.suggestionText {
+  font-size: 0.625rem;
+  color: $color-success;
+  margin: 0;
+  font-weight: $font-weight-medium;
+}
+
+// =====================================
+// FLOATING CARDS - Better positioning
+// =====================================
+.floatingCard1,
+.floatingCard2 {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  background: rgba(24, 24, 27, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid $color-border-default;
+  border-radius: $radius-lg;
+  padding: $space-3 $space-4;
+  box-shadow: $shadow-lg;
+  z-index: 2;
+}
+
+.floatingCard1 {
+  top: 18%;
+  left: -32px;
+  animation: float 4s ease-in-out infinite;
+
+  @include sm {
+    left: -52px;
+  }
+}
+
+.floatingCard2 {
+  bottom: 22%;
+  right: -32px;
+  animation: float 4s ease-in-out infinite 2s;
+
+  @include sm {
+    right: -52px;
+  }
+}
+
+.floatingIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: $radius-md;
+  flex-shrink: 0;
+}
+
+.floatingTitle {
+  font-size: 0.625rem;
+  color: $color-text-tertiary;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: $letter-spacing-wider;
+  font-weight: $font-weight-semibold;
+}
+
+.floatingValue {
+  font-size: $font-size-sm;
+  color: $color-text-primary;
+  font-weight: $font-weight-semibold;
+  margin: 0;
+  white-space: nowrap;
+}

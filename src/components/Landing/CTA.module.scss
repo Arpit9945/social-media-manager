@@ -1,0 +1,140 @@
+.section {
+  padding: $space-12 0 $space-20;
+
+  @include md {
+    padding: $space-16 0 $space-24;
+  }
+}
+
+.container {
+  @include container;
+}
+
+.card {
+  position: relative;
+  padding: $space-12 $space-6;
+  background: $color-surface;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-3xl;
+  text-align: center;
+  overflow: hidden;
+
+  @include md {
+    padding: $space-20 $space-12;
+  }
+}
+
+.glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background: $gradient-glow;
+  filter: blur(80px);
+  pointer-events: none;
+  animation: float 6s ease-in-out infinite;
+}
+
+.grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(ellipse at center, black 0%, transparent 80%);
+  pointer-events: none;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.title {
+  font-family: $font-display;
+  font-size: $font-size-3xl;
+  font-weight: $font-weight-semibold;
+  letter-spacing: $letter-spacing-tightest;
+  line-height: 1.05;
+  color: $color-text-primary;
+  margin-bottom: $space-5;
+
+  @include md {
+    font-size: $font-size-5xl;
+  }
+
+  @include lg {
+    font-size: $font-size-6xl;
+  }
+}
+
+.gradient {
+  background: $gradient-primary;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.subtitle {
+  font-size: $font-size-md;
+  color: $color-text-secondary;
+  margin-bottom: $space-8;
+  line-height: $line-height-relaxed;
+  letter-spacing: $letter-spacing-snug;
+
+  @include md {
+    font-size: $font-size-lg;
+  }
+}
+
+.cta {
+  @include button-base;
+  height: 48px;
+  padding: 0 $space-8;
+  background: $color-text-primary;
+  color: $color-bg-primary;
+  border-radius: $radius-full;
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+  letter-spacing: $letter-spacing-snug;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: $gradient-primary;
+    opacity: 0;
+    transition: opacity $transition-base;
+  }
+
+  & > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  svg {
+    transition: transform $transition-base;
+  }
+
+  &:hover {
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: $shadow-glow;
+
+    &::before {
+      opacity: 1;
+    }
+
+    svg {
+      transform: translateX(2px);
+    }
+  }
+}

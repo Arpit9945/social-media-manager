@@ -1,0 +1,132 @@
+.footer {
+  position: relative;
+  background: $color-bg-secondary;
+  border-top: 1px solid $color-border-subtle;
+  padding: $space-16 0 $space-8;
+  margin-top: $space-20;
+
+  @include md {
+    margin-top: $space-32;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    max-width: 600px;
+    height: 1px;
+    background: $gradient-primary;
+    opacity: 0.3;
+  }
+}
+
+.container {
+  @include container;
+}
+
+.top {
+  display: flex;
+  flex-direction: column;
+  gap: $space-10;
+
+  @include lg {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: $space-16;
+  }
+}
+
+.brand {
+  flex: 1;
+  max-width: 360px;
+}
+
+.logoLink {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: $space-4;
+  color: $color-text-primary;
+}
+
+.tagline {
+  color: $color-text-secondary;
+  font-size: $font-size-sm;
+  line-height: $line-height-relaxed;
+  letter-spacing: $letter-spacing-snug;
+}
+
+.linksGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $space-8;
+
+  @include sm {
+    grid-template-columns: repeat(3, 1fr);
+    gap: $space-12;
+  }
+}
+
+.linkColumn {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.columnTitle {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  text-transform: uppercase;
+  letter-spacing: $letter-spacing-wider;
+}
+
+.linkList {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.link {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  transition: color $transition-fast;
+  letter-spacing: $letter-spacing-snug;
+
+  &:hover {
+    color: $color-text-primary;
+  }
+}
+
+.bottom {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  align-items: center;
+  text-align: center;
+  margin-top: $space-12;
+  padding-top: $space-6;
+  border-top: 1px solid $color-border-subtle;
+
+  @include md {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+}
+
+.copyright,
+.madeWith {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  margin: 0;
+  letter-spacing: $letter-spacing-snug;
+}
+
+.heart {
+  display: inline-block;
+  color: $color-secondary;
+  animation: pulse 1.5s ease-in-out infinite;
+}

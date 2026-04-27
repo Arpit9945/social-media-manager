@@ -1,0 +1,423 @@
+.page {
+  min-height: 100vh;
+  background: $color-bg-primary;
+}
+
+.main {
+  @include container;
+  padding: $space-10 $space-4 $space-16;
+  max-width: 800px;
+
+  @include md {
+    padding: $space-12 $space-6 $space-20;
+  }
+}
+
+.inputView {
+  animation: slideUp 0.4s $ease-out both;
+}
+
+.titleBlock {
+  margin-bottom: $space-10;
+  text-align: center;
+
+  @include md {
+    text-align: left;
+  }
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 0.6875rem;
+  font-weight: $font-weight-semibold;
+  color: $color-secondary;
+  letter-spacing: $letter-spacing-wider;
+  text-transform: uppercase;
+  margin-bottom: $space-3;
+  padding: $space-1 $space-3;
+  background: rgba(236, 72, 153, 0.1);
+  border-radius: $radius-full;
+}
+
+.title {
+  font-family: $font-display;
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-semibold;
+  letter-spacing: $letter-spacing-tightest;
+  line-height: 1.1;
+  color: $color-text-primary;
+  margin-bottom: $space-3;
+
+  @include md {
+    font-size: $font-size-3xl;
+  }
+
+  @include lg {
+    font-size: $font-size-4xl;
+  }
+}
+
+.gradient {
+  background: $gradient-primary;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.subtitle {
+  font-size: $font-size-md;
+  color: $color-text-secondary;
+  line-height: $line-height-relaxed;
+  letter-spacing: $letter-spacing-snug;
+  max-width: 600px;
+  margin: 0 auto;
+
+  @include md {
+    margin: 0;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: $space-5;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.label {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  letter-spacing: $letter-spacing-snug;
+}
+
+.required { color: $color-secondary; }
+.optional { color: $color-text-tertiary; font-weight: $font-weight-regular; }
+
+.handleInput {
+  display: flex;
+  align-items: center;
+  background: $color-surface;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-md;
+  transition: all $transition-fast;
+
+  &:focus-within {
+    border-color: $color-accent;
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+  }
+
+  .input {
+    border: none;
+    background: transparent;
+    
+    &:focus {
+      box-shadow: none;
+    }
+  }
+}
+
+.handlePrefix {
+  padding-left: $space-4;
+  color: $color-text-tertiary;
+  font-weight: $font-weight-medium;
+}
+
+.input,
+.textarea {
+  width: 100%;
+  padding: $space-3 $space-4;
+  background: $color-surface;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-md;
+  color: $color-text-primary;
+  font-size: $font-size-base;
+  font-family: $font-sans;
+  letter-spacing: $letter-spacing-snug;
+  transition: border-color $transition-fast, box-shadow $transition-fast;
+
+  &::placeholder {
+    color: $color-text-muted;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $color-accent;
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+  }
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 80px;
+  line-height: $line-height-relaxed;
+}
+
+.helpText {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  margin: 0;
+  letter-spacing: $letter-spacing-snug;
+}
+
+// Captions list
+.captionsList {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.captionRow {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: $space-2;
+  align-items: flex-start;
+  padding: $space-3;
+  background: $color-surface;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-md;
+  transition: border-color $transition-fast;
+
+  &:focus-within {
+    border-color: $color-accent;
+  }
+}
+
+.captionNumber {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  color: $color-text-tertiary;
+  background: $color-bg-tertiary;
+  padding: $space-1 $space-2;
+  border-radius: $radius-sm;
+  margin-top: $space-1;
+}
+
+.captionTextarea {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: $color-text-primary;
+  font-size: $font-size-sm;
+  font-family: $font-sans;
+  letter-spacing: $letter-spacing-snug;
+  resize: vertical;
+  min-height: 60px;
+  line-height: $line-height-relaxed;
+
+  &::placeholder {
+    color: $color-text-muted;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.removeBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: transparent;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-sm;
+  color: $color-text-tertiary;
+  cursor: pointer;
+  transition: all $transition-fast;
+  margin-top: $space-1;
+
+  &:hover {
+    color: $color-error;
+    border-color: $color-error;
+  }
+}
+
+.addBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-2 $space-4;
+  background: transparent;
+  border: 1px dashed $color-border-default;
+  border-radius: $radius-md;
+  color: $color-text-secondary;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: all $transition-fast;
+  align-self: flex-start;
+  margin-top: $space-2;
+
+  &:hover {
+    border-color: $color-accent;
+    color: $color-accent;
+    background: $color-accent-subtle;
+  }
+}
+
+.error {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-3 $space-4;
+  background: $color-error-bg;
+  border: 1px solid $color-error;
+  border-radius: $radius-md;
+  color: $color-error;
+  font-size: $font-size-sm;
+}
+
+.auditBtn {
+  @include button-base;
+  height: 52px;
+  padding: 0 $space-8;
+  background: $gradient-primary;
+  color: white;
+  border-radius: $radius-full;
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+  letter-spacing: $letter-spacing-snug;
+  margin-top: $space-3;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s;
+  }
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: $shadow-glow;
+
+    &::before {
+      left: 100%;
+    }
+  }
+}
+
+// Loading view (same as ReelAnalyzer)
+.loadingView {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: $space-20 $space-4;
+  min-height: 60vh;
+  animation: fadeIn 0.3s $ease-out both;
+}
+
+.loadingAnimation {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: $space-8;
+}
+
+.pulseRing {
+  position: absolute;
+  border: 2px solid $color-secondary;
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  animation: pulseRingProfile 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+
+  &:nth-child(2) { animation-delay: 0.4s; }
+  &:nth-child(3) { animation-delay: 0.8s; }
+}
+
+@keyframes pulseRingProfile {
+  0% { transform: scale(0.5); opacity: 1; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+.loadingCore {
+  position: relative;
+  z-index: 1;
+  width: 64px;
+  height: 64px;
+  background: $color-bg-elevated;
+  border: 1px solid $color-border-default;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loadingTitle {
+  font-family: $font-display;
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-semibold;
+  letter-spacing: $letter-spacing-tightest;
+  color: $color-text-primary;
+  margin-bottom: $space-6;
+}
+
+.loadingSteps {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  max-width: 320px;
+  margin: 0;
+  padding: 0;
+}
+
+.loadingStep {
+  display: block;
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+  padding-left: $space-5;
+  position: relative;
+  opacity: 0;
+  animation: stepFadeIn 0.5s ease-out forwards;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: $color-secondary;
+    box-shadow: 0 0 6px $color-secondary;
+  }
+
+  @for $i from 1 through 5 {
+    &:nth-child(#{$i}) {
+      animation-delay: #{$i * 1.5}s;
+    }
+  }
+}
+
+@keyframes stepFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

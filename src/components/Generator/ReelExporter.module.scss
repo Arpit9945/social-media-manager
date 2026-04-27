@@ -1,0 +1,272 @@
+.exporter {
+  animation: slideUp 0.4s $ease-out both;
+}
+
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-2 $space-4;
+  background: $color-surface;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-full;
+  color: $color-text-secondary;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  margin-bottom: $space-6;
+  transition: all $transition-fast;
+
+  &:hover {
+    border-color: $color-border-strong;
+    color: $color-text-primary;
+  }
+}
+
+.titleBlock {
+  margin-bottom: $space-8;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 0.6875rem;
+  font-weight: $font-weight-semibold;
+  color: $color-accent;
+  letter-spacing: $letter-spacing-wider;
+  text-transform: uppercase;
+  margin-bottom: $space-3;
+  padding: $space-1 $space-3;
+  background: $color-accent-subtle;
+  border-radius: $radius-full;
+}
+
+.title {
+  font-family: $font-display;
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-semibold;
+  letter-spacing: $letter-spacing-tightest;
+  color: $color-text-primary;
+  margin-bottom: $space-3;
+
+  @include md {
+    font-size: $font-size-3xl;
+  }
+}
+
+.subtitle {
+  font-size: $font-size-md;
+  color: $color-text-secondary;
+  line-height: $line-height-relaxed;
+  max-width: 600px;
+  margin: 0;
+}
+
+.error {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-3 $space-4;
+  background: $color-error-bg;
+  border: 1px solid $color-error;
+  border-radius: $radius-md;
+  color: $color-error;
+  font-size: $font-size-sm;
+  margin-bottom: $space-4;
+}
+
+// Formats grid
+.formatsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-4;
+  margin-bottom: $space-6;
+
+  @include md {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.formatCard {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  padding: $space-5;
+  background: $color-surface;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-xl;
+  transition: all $transition-base;
+  position: relative;
+  overflow: hidden;
+
+  &:hover:not(.disabled):not(.exporting) {
+    border-color: $color-border-strong;
+    transform: translateY(-2px);
+  }
+}
+
+.exporting {
+  border-color: $color-accent;
+  box-shadow: 0 0 0 1px $color-accent;
+}
+
+.completed {
+  border-color: $color-success;
+
+  .formatBadge {
+    display: none;
+  }
+}
+
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.formatHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: $space-3;
+}
+
+.formatIcon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.formatTitles {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+  flex: 1;
+}
+
+.formatName {
+  font-family: $font-display;
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  letter-spacing: $letter-spacing-tight;
+  color: $color-text-primary;
+  margin: 0;
+}
+
+.formatBadge {
+  display: inline-block;
+  font-size: 0.625rem;
+  font-weight: $font-weight-semibold;
+  text-transform: uppercase;
+  letter-spacing: $letter-spacing-wider;
+  padding: 2px 8px;
+  background: $color-accent-subtle;
+  color: $color-accent;
+  border-radius: $radius-sm;
+  width: fit-content;
+}
+
+.formatDesc {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  line-height: $line-height-relaxed;
+  margin: 0;
+  flex: 1;
+}
+
+.formatMeta {
+  display: flex;
+  gap: $space-3;
+  flex-wrap: wrap;
+}
+
+.metaItem {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+}
+
+.disabledNote {
+  font-size: $font-size-xs;
+  color: $color-error;
+  margin: 0;
+}
+
+.exportBtn {
+  @include button-base;
+  height: 44px;
+  background: $gradient-primary;
+  color: white;
+  border-radius: $radius-full;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  letter-spacing: $letter-spacing-snug;
+  margin-top: $space-2;
+  gap: $space-2;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: $shadow-glow;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+.exportBtnDone {
+  background: $color-success-bg;
+  color: $color-success;
+  border: 1px solid $color-success;
+}
+
+.spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+.progressBar {
+  height: 3px;
+  background: $color-bg-tertiary;
+  border-radius: $radius-full;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: $gradient-primary;
+  border-radius: $radius-full;
+  transition: width 0.2s ease;
+}
+
+// Tips box
+.tipsBox {
+  padding: $space-5;
+  background: $color-surface;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-lg;
+}
+
+.tipsTitle {
+  font-family: $font-display;
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin: 0 0 $space-3;
+  letter-spacing: $letter-spacing-tight;
+}
+
+.tipsList {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  margin: 0;
+  padding-left: $space-5;
+
+  li {
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+    line-height: $line-height-relaxed;
+  }
+}

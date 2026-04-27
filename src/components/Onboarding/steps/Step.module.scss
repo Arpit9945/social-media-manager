@@ -1,0 +1,816 @@
+// Shared onboarding step styles
+
+.step {
+  display: flex;
+  flex-direction: column;
+}
+
+.stepBadge {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 0.6875rem;
+  font-weight: $font-weight-semibold;
+  color: $color-accent;
+  letter-spacing: $letter-spacing-wider;
+  text-transform: uppercase;
+  margin-bottom: $space-4;
+  padding: $space-1 $space-3;
+  background: $color-accent-subtle;
+  border-radius: $radius-full;
+}
+
+.title {
+  font-family: $font-display;
+  font-size: $font-size-3xl;
+  font-weight: $font-weight-semibold;
+  letter-spacing: $letter-spacing-tightest;
+  line-height: 1.1;
+  color: $color-text-primary;
+  margin-bottom: $space-3;
+
+  @include md {
+    font-size: $font-size-4xl;
+  }
+}
+
+.gradient {
+  background: $gradient-primary;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.description {
+  font-size: $font-size-md;
+  color: $color-text-secondary;
+  line-height: $line-height-relaxed;
+  letter-spacing: $letter-spacing-snug;
+  margin-bottom: $space-8;
+
+  em {
+    font-family: $font-serif;
+    font-style: italic;
+    color: $color-text-primary;
+  }
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: $space-6;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.label {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  letter-spacing: $letter-spacing-snug;
+  margin-bottom: $space-1;
+}
+
+.required {
+  color: $color-secondary;
+}
+
+.optional {
+  color: $color-text-tertiary;
+  font-weight: $font-weight-regular;
+}
+
+.input,
+.textarea,
+.select {
+  width: 100%;
+  padding: $space-3 $space-4;
+  background: $color-surface;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-md;
+  color: $color-text-primary;
+  font-size: $font-size-base;
+  font-family: $font-sans;
+  letter-spacing: $letter-spacing-snug;
+  transition: border-color $transition-fast, box-shadow $transition-fast;
+
+  &::placeholder {
+    color: $color-text-muted;
+  }
+
+  &:hover:not(:focus) {
+    border-color: $color-border-strong;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $color-accent;
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+  }
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 80px;
+  line-height: $line-height-relaxed;
+}
+
+.select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M3 5l3 3 3-3' stroke='%23a1a1aa' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right $space-4 center;
+  padding-right: $space-10;
+}
+
+.uploadBox {
+  display: flex;
+  align-items: center;
+  gap: $space-4;
+  padding: $space-5;
+  background: $color-surface;
+  border: 1.5px dashed $color-border-default;
+  border-radius: $radius-md;
+  cursor: pointer;
+  transition: all $transition-fast;
+  color: $color-text-secondary;
+
+  &:hover:not(.uploading) {
+    border-color: $color-accent;
+    background: $color-accent-subtle;
+    color: $color-text-primary;
+  }
+
+  svg {
+    flex-shrink: 0;
+    color: $color-accent;
+  }
+}
+
+.uploading {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.fileInput {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.uploadTitle {
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin: 0 0 2px;
+}
+
+.uploadSubtitle {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  margin: 0;
+}
+
+.logoPreview {
+  display: flex;
+  align-items: center;
+  gap: $space-4;
+  padding: $space-4;
+  background: $color-surface;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-md;
+}
+
+.logoImage {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  background: $color-bg-tertiary;
+  border-radius: $radius-sm;
+  padding: $space-2;
+}
+
+.removeLogoBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-2 $space-3;
+  background: transparent;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-sm;
+  color: $color-text-secondary;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  margin-left: auto;
+  transition: all $transition-fast;
+
+  &:hover {
+    color: $color-error;
+    border-color: $color-error;
+  }
+}
+
+.fieldError {
+  font-size: $font-size-xs;
+  color: $color-error;
+  margin: 0;
+}
+
+.helpText {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  margin: 0;
+  letter-spacing: $letter-spacing-snug;
+}
+
+// =====================================
+// COLOR PRESETS (Step 3)
+// =====================================
+.colorPreview {
+  margin-bottom: $space-6;
+}
+
+.previewCard {
+  position: relative;
+  height: 140px;
+  border-radius: $radius-xl;
+  overflow: hidden;
+  border: 1px solid $color-border-default;
+}
+
+.previewBg {
+  position: absolute;
+  inset: 0;
+  transition: background $transition-base;
+}
+
+.previewContent {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: $space-6;
+  background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.5) 100%);
+}
+
+.previewLabel {
+  font-size: 0.6875rem;
+  font-weight: $font-weight-semibold;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: $letter-spacing-wider;
+  margin: 0 0 $space-2;
+}
+
+.previewTitle {
+  font-family: $font-display;
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  color: white;
+  letter-spacing: $letter-spacing-tight;
+  margin: 0 0 $space-1;
+}
+
+.previewSubtitle {
+  font-size: $font-size-sm;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+}
+
+.presetGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $space-2;
+
+  @include sm {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.presetBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-3;
+  background: $color-surface;
+  border: 1.5px solid $color-border-default;
+  border-radius: $radius-md;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    border-color: $color-border-strong;
+    transform: translateY(-1px);
+  }
+}
+
+.presetSelected {
+  border-color: $color-accent;
+  background: $color-accent-subtle;
+
+  &:hover {
+    border-color: $color-accent;
+  }
+}
+
+.presetSwatch {
+  width: 100%;
+  height: 36px;
+  border-radius: $radius-sm;
+}
+
+.presetName {
+  font-size: 0.6875rem;
+  font-weight: $font-weight-medium;
+  color: $color-text-secondary;
+  text-align: center;
+}
+
+.colorRow {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-4;
+
+  @include sm {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.colorInputWrapper {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-2;
+  background: $color-surface;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-md;
+
+  &:focus-within {
+    border-color: $color-accent;
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+  }
+}
+
+.colorInput {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: none;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  background: transparent;
+  flex-shrink: 0;
+
+  &::-webkit-color-swatch-wrapper {
+    padding: 0;
+  }
+
+  &::-webkit-color-swatch {
+    border: 1px solid $color-border-default;
+    border-radius: $radius-sm;
+  }
+}
+
+.colorHex {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: $color-text-primary;
+  font-size: $font-size-base;
+  font-family: $font-mono;
+  outline: none;
+  text-transform: uppercase;
+}
+
+// =====================================
+// CATEGORY GRID (Step 4)
+// =====================================
+.categoryGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $space-2;
+
+  @include sm {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.categoryBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: $space-2;
+  padding: $space-3 $space-4;
+  background: $color-surface;
+  border: 1.5px solid $color-border-default;
+  border-radius: $radius-md;
+  cursor: pointer;
+  transition: all $transition-fast;
+  text-align: left;
+  min-height: 76px;
+
+  &:hover {
+    border-color: $color-border-strong;
+    transform: translateY(-1px);
+  }
+}
+
+.categorySelected {
+  border-color: $color-accent;
+  background: $color-accent-subtle;
+}
+
+.categoryEmoji {
+  font-size: 1.25rem;
+}
+
+.categoryLabel {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+  line-height: $line-height-snug;
+}
+
+// =====================================
+// AGE RANGE
+// =====================================
+.ageRange {
+  padding: $space-5;
+  background: $color-surface;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-md;
+}
+
+.ageDisplay {
+  display: flex;
+  align-items: baseline;
+  gap: $space-2;
+  margin-bottom: $space-5;
+  justify-content: center;
+}
+
+.ageValue {
+  font-family: $font-display;
+  font-size: $font-size-3xl;
+  font-weight: $font-weight-bold;
+  color: $color-text-primary;
+  letter-spacing: $letter-spacing-tight;
+  background: $gradient-primary;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.ageSeparator {
+  font-size: $font-size-xl;
+  color: $color-text-tertiary;
+}
+
+.ageLabel {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  margin-left: $space-2;
+}
+
+.sliders {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.sliderRow {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.sliderLabel {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  font-weight: $font-weight-medium;
+}
+
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  background: $color-bg-tertiary;
+  border-radius: $radius-full;
+  outline: none;
+  cursor: pointer;
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    background: white;
+    border: 2px solid $color-accent;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform $transition-fast;
+  }
+
+  &::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    background: white;
+    border: 2px solid $color-accent;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform $transition-fast;
+  }
+
+  &::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+  }
+}
+
+// =====================================
+// OPTION ROW (gender)
+// =====================================
+.optionRow {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-2;
+
+  @include sm {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.optionBtn {
+  padding: $space-3 $space-4;
+  background: $color-surface;
+  border: 1.5px solid $color-border-default;
+  border-radius: $radius-md;
+  color: $color-text-primary;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    border-color: $color-border-strong;
+  }
+}
+
+.optionSelected {
+  border-color: $color-accent;
+  background: $color-accent-subtle;
+  color: $color-text-primary;
+}
+
+// =====================================
+// TONE SELECTOR (Step 5)
+// =====================================
+.toneList {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.toneBtn {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  padding: $space-4;
+  background: $color-surface;
+  border: 1.5px solid $color-border-default;
+  border-radius: $radius-md;
+  cursor: pointer;
+  transition: all $transition-fast;
+  text-align: left;
+
+  &:hover {
+    border-color: $color-border-strong;
+    transform: translateY(-1px);
+  }
+}
+
+.toneSelected {
+  border-color: $color-accent;
+  background: $color-accent-subtle;
+
+  .toneCheck {
+    background: $color-accent;
+    color: white;
+  }
+}
+
+.toneHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.toneLabel {
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  letter-spacing: $letter-spacing-snug;
+}
+
+.toneCheck {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: $color-bg-tertiary;
+  color: transparent;
+  flex-shrink: 0;
+  transition: all $transition-fast;
+}
+
+.toneDescription {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  margin: 0;
+  letter-spacing: $letter-spacing-snug;
+}
+
+.toneExample {
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+  font-style: italic;
+  margin: $space-1 0 0;
+  padding-left: $space-3;
+  border-left: 2px solid $color-border-default;
+  line-height: $line-height-relaxed;
+}
+
+// Instagram handle
+.handleInput {
+  display: flex;
+  align-items: center;
+  background: $color-surface;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-md;
+  transition: all $transition-fast;
+
+  &:focus-within {
+    border-color: $color-accent;
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+  }
+
+  .input {
+    border: none;
+    background: transparent;
+    box-shadow: none !important;
+
+    &:focus {
+      box-shadow: none;
+    }
+  }
+}
+
+.handlePrefix {
+  padding-left: $space-4;
+  color: $color-text-tertiary;
+  font-size: $font-size-base;
+  font-weight: $font-weight-medium;
+}
+
+// =====================================
+// WELCOME STEP
+// =====================================
+.welcomeIcon {
+  margin-bottom: $space-6;
+  animation: scaleIn 0.5s $ease-out 0.1s both;
+}
+
+.benefits {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  margin: $space-6 0 $space-8;
+}
+
+.benefit {
+  display: flex;
+  align-items: center;
+  gap: $space-4;
+  padding: $space-4;
+  background: $color-surface;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-md;
+}
+
+.benefitIcon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.benefitTitle {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin: 0 0 2px;
+  letter-spacing: $letter-spacing-snug;
+}
+
+.benefitText {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  margin: 0;
+}
+
+.startButton {
+  @include button-base;
+  height: 48px;
+  padding: 0 $space-8;
+  background: $color-text-primary;
+  color: $color-bg-primary;
+  border-radius: $radius-full;
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+  letter-spacing: $letter-spacing-snug;
+  align-self: flex-start;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: $gradient-primary;
+    opacity: 0;
+    transition: opacity $transition-base;
+  }
+
+  & > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  svg {
+    transition: transform $transition-base;
+  }
+
+  &:hover {
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: $shadow-glow;
+
+    &::before {
+      opacity: 1;
+    }
+
+    svg {
+      transform: translateX(2px);
+    }
+  }
+}
+
+// Spinner
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-top-color: $color-accent;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+// =====================================
+// SUMMARY (Step 5 end)
+// =====================================
+.summary {
+  margin-top: $space-6;
+  padding: $space-5;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.1));
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: $radius-lg;
+  text-align: center;
+}
+
+.summaryTitle {
+  font-family: $font-display;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin: 0 0 $space-1;
+  letter-spacing: $letter-spacing-tight;
+}
+
+.summaryText {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  margin: 0;
+}

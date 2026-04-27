@@ -1,0 +1,558 @@
+.report {
+  display: flex;
+  flex-direction: column;
+  gap: $space-8;
+  animation: slideUp 0.4s $ease-out both;
+}
+
+// Header
+.header {
+  padding-bottom: $space-6;
+  border-bottom: 1px solid $color-border-subtle;
+}
+
+.headerTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: $space-4;
+  margin-bottom: $space-4;
+}
+
+.label {
+  display: inline-block;
+  font-size: 0.6875rem;
+  font-weight: $font-weight-semibold;
+  color: $color-success;
+  letter-spacing: $letter-spacing-wider;
+  text-transform: uppercase;
+  margin-bottom: $space-2;
+  padding: $space-1 $space-3;
+  background: $color-success-bg;
+  border-radius: $radius-full;
+}
+
+.title {
+  font-family: $font-display;
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-semibold;
+  letter-spacing: $letter-spacing-tightest;
+  line-height: 1.2;
+  color: $color-text-primary;
+  margin: 0;
+
+  @include md {
+    font-size: $font-size-3xl;
+  }
+}
+
+.gradient {
+  background: $gradient-primary;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.scoreBadge {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2px;
+  padding: $space-3 $space-5;
+  background: $color-accent-subtle;
+  border: 1px solid $color-accent;
+  border-radius: $radius-md;
+  flex-shrink: 0;
+}
+
+.scoreNumber {
+  font-family: $font-display;
+  font-size: $font-size-3xl;
+  font-weight: $font-weight-bold;
+  color: $color-accent;
+  letter-spacing: $letter-spacing-tight;
+  line-height: 1;
+}
+
+.scoreOf {
+  font-size: $font-size-sm;
+  color: $color-accent;
+  opacity: 0.6;
+}
+
+.positioningChip {
+  display: inline-block;
+  padding: $space-2 $space-3;
+  background: $color-bg-tertiary;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-full;
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+  text-transform: capitalize;
+  margin-bottom: $space-4;
+
+  strong {
+    color: $color-text-primary;
+    font-weight: $font-weight-semibold;
+  }
+}
+
+.takeaway {
+  padding: $space-4;
+  background: $color-accent-subtle;
+  border: 1px solid $color-border-accent;
+  border-radius: $radius-md;
+  margin-bottom: $space-5;
+}
+
+.takeawayLabel {
+  display: block;
+  font-size: 0.6875rem;
+  font-weight: $font-weight-semibold;
+  color: $color-accent;
+  letter-spacing: $letter-spacing-wider;
+  text-transform: uppercase;
+  margin-bottom: $space-1;
+}
+
+.takeawayText {
+  font-size: $font-size-md;
+  color: $color-text-primary;
+  line-height: $line-height-relaxed;
+  margin: 0;
+}
+
+.actions {
+  display: flex;
+  gap: $space-2;
+  flex-wrap: wrap;
+}
+
+.actionBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-2 $space-4;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  border-radius: $radius-full;
+  border: 1px solid $color-border-default;
+  background: $color-surface;
+  color: $color-text-primary;
+  text-decoration: none;
+  transition: all $transition-fast;
+  cursor: pointer;
+
+  &:hover {
+    border-color: $color-border-strong;
+    background: $color-surface-hover;
+    transform: translateY(-1px);
+  }
+}
+
+// Section
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.sectionTitle {
+  font-family: $font-display;
+  font-size: $font-size-xl;
+  font-weight: $font-weight-semibold;
+  letter-spacing: $letter-spacing-tight;
+  color: $color-text-primary;
+  margin: 0;
+
+  @include md {
+    font-size: $font-size-2xl;
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+  padding: $space-6;
+  background: $color-surface;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-xl;
+}
+
+.cardScore {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  font-size: $font-size-sm;
+
+  span {
+    color: $color-text-tertiary;
+  }
+
+  strong {
+    font-family: $font-display;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    color: $color-text-primary;
+    letter-spacing: $letter-spacing-tight;
+  }
+}
+
+.checks {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.check {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  padding: $space-2 $space-3;
+  border-radius: $radius-md;
+}
+
+.checkPass {
+  background: $color-success-bg;
+  color: $color-success;
+}
+
+.checkFail {
+  background: $color-error-bg;
+  color: $color-error;
+}
+
+.subTitle {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin: 0;
+  letter-spacing: $letter-spacing-snug;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  margin: 0;
+  padding-left: $space-5;
+
+  li {
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+    line-height: $line-height-relaxed;
+  }
+}
+
+.issuesBlock,
+.pillarsBlock,
+.planBlock {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.improvedBlock {
+  background: $color-bg-primary;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.improvedHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $space-3 $space-4;
+  background: $color-bg-tertiary;
+  border-bottom: 1px solid $color-border-subtle;
+}
+
+.improvedLabel {
+  font-size: 0.6875rem;
+  font-weight: $font-weight-semibold;
+  color: $color-text-tertiary;
+  letter-spacing: $letter-spacing-wider;
+  text-transform: uppercase;
+}
+
+.copyBtn {
+  padding: $space-1 $space-3;
+  background: $color-surface;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-full;
+  color: $color-text-primary;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: $color-surface-hover;
+    border-color: $color-border-strong;
+  }
+}
+
+.improvedText {
+  padding: $space-4;
+  font-size: $font-size-sm;
+  color: $color-text-primary;
+  line-height: $line-height-relaxed;
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.metaChips {
+  display: flex;
+  gap: $space-2;
+  flex-wrap: wrap;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-1;
+  padding: $space-2 $space-3;
+  background: $color-bg-tertiary;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-full;
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+  text-transform: capitalize;
+
+  strong {
+    color: $color-text-primary;
+    font-weight: $font-weight-semibold;
+  }
+}
+
+.pillarsList {
+  display: flex;
+  gap: $space-2;
+  flex-wrap: wrap;
+}
+
+.pillarChip {
+  padding: $space-1 $space-3;
+  background: $color-accent-subtle;
+  color: $color-accent;
+  border-radius: $radius-full;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+}
+
+// Pillars grid
+.pillarsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-3;
+
+  @include sm {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include lg {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.pillarCard {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  padding: $space-5;
+  background: $color-surface;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-xl;
+}
+
+.pillarHeader {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+}
+
+.pillarNum {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: $gradient-primary;
+  color: white;
+  border-radius: 50%;
+  font-family: $font-display;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-sm;
+}
+
+.pillarName {
+  font-family: $font-display;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  letter-spacing: $letter-spacing-tight;
+  color: $color-text-primary;
+  margin: 0;
+}
+
+.pillarDesc {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  line-height: $line-height-relaxed;
+  margin: 0;
+}
+
+.ideasBlock {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  padding-top: $space-3;
+  border-top: 1px solid $color-border-subtle;
+}
+
+.ideasLabel {
+  font-size: 0.625rem;
+  font-weight: $font-weight-semibold;
+  color: $color-text-tertiary;
+  letter-spacing: $letter-spacing-wider;
+  text-transform: uppercase;
+}
+
+// Checklist
+.checklist {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.checklistItem {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: $space-3;
+  align-items: flex-start;
+  padding: $space-4;
+  background: $color-surface;
+  border: 1px solid $color-border-default;
+  border-left-width: 3px;
+  border-radius: $radius-md;
+}
+
+.priority_high { border-left-color: $color-error; }
+.priority_medium { border-left-color: $color-warning; }
+.priority_low { border-left-color: $color-info; }
+
+.priorityBadge {
+  font-size: 0.625rem;
+  font-weight: $font-weight-semibold;
+  text-transform: uppercase;
+  letter-spacing: $letter-spacing-wider;
+  padding: 2px 8px;
+  border-radius: $radius-sm;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.badge_high { background: $color-error-bg; color: $color-error; }
+.badge_medium { background: $color-warning-bg; color: $color-warning; }
+.badge_low { background: $color-info-bg; color: $color-info; }
+
+.taskText {
+  font-size: $font-size-sm;
+  color: $color-text-primary;
+  font-weight: $font-weight-medium;
+  margin: 0 0 $space-1;
+  line-height: $line-height-relaxed;
+}
+
+.whyText {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  margin: 0;
+  line-height: $line-height-relaxed;
+}
+
+// Growth Strategy
+.focusBlock {
+  padding: $space-4;
+  background: $color-accent-subtle;
+  border: 1px solid $color-border-accent;
+  border-radius: $radius-md;
+}
+
+.focusLabel {
+  display: block;
+  font-size: 0.6875rem;
+  font-weight: $font-weight-semibold;
+  color: $color-accent;
+  letter-spacing: $letter-spacing-wider;
+  text-transform: uppercase;
+  margin-bottom: $space-1;
+}
+
+.focusText {
+  font-size: $font-size-md;
+  color: $color-text-primary;
+  font-weight: $font-weight-medium;
+  margin: 0;
+  line-height: $line-height-relaxed;
+}
+
+.planList {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.planItem {
+  display: flex;
+  align-items: flex-start;
+  gap: $space-3;
+  padding: $space-3;
+  background: $color-bg-tertiary;
+  border-radius: $radius-md;
+
+  p {
+    font-size: $font-size-sm;
+    color: $color-text-primary;
+    margin: 0;
+    line-height: $line-height-relaxed;
+  }
+}
+
+.planNum {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: $color-bg-elevated;
+  border: 1px solid $color-border-default;
+  border-radius: 50%;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-bold;
+  color: $color-text-primary;
+  flex-shrink: 0;
+}
+
+.expectationBlock {
+  padding-top: $space-4;
+  border-top: 1px solid $color-border-subtle;
+}
+
+.expectationLabel {
+  display: block;
+  font-size: 0.6875rem;
+  font-weight: $font-weight-semibold;
+  color: $color-text-tertiary;
+  letter-spacing: $letter-spacing-wider;
+  text-transform: uppercase;
+  margin-bottom: $space-1;
+}
+
+.expectationText {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  margin: 0;
+  font-style: italic;
+  line-height: $line-height-relaxed;
+}

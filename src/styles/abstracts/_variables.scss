@@ -1,0 +1,196 @@
+// ============================================
+// DESIGN TOKENS - Single source of truth
+// Update colors/fonts here and entire app updates
+// ============================================
+
+// COLORS - Modern dark theme (refined for iPhone aesthetic)
+$color-bg-primary: #0a0a0b;
+$color-bg-secondary: #111113;
+$color-bg-tertiary: #18181b;
+$color-bg-elevated: #1f1f23;
+$color-bg-hover: #27272a;
+
+$color-surface: #18181b;
+$color-surface-hover: #27272a;
+$color-surface-active: #3f3f46;
+
+// Text - refined hierarchy
+$color-text-primary: #f4f4f5;
+$color-text-secondary: #a1a1aa;
+$color-text-tertiary: #71717a;
+$color-text-muted: #52525b;
+$color-text-disabled: #3f3f46;
+
+// Borders
+$color-border-subtle: rgba(255, 255, 255, 0.06);
+$color-border-default: rgba(255, 255, 255, 0.1);
+$color-border-strong: rgba(255, 255, 255, 0.15);
+$color-border-accent: rgba(139, 92, 246, 0.3);
+
+// Brand
+$color-accent: #8b5cf6;
+$color-accent-hover: #a78bfa;
+$color-accent-active: #7c3aed;
+$color-accent-subtle: rgba(139, 92, 246, 0.1);
+$color-accent-muted: rgba(139, 92, 246, 0.15);
+
+$color-secondary: #ec4899;
+$color-secondary-hover: #f472b6;
+
+// Gradients
+$gradient-primary: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+$gradient-subtle: linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(236, 72, 153, 0.15) 100%);
+$gradient-glow: radial-gradient(circle at center, rgba(139, 92, 246, 0.25) 0%, transparent 70%);
+$gradient-mesh: radial-gradient(at 20% 0%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(at 80% 100%, rgba(236, 72, 153, 0.15) 0%, transparent 50%);
+
+// Status
+$color-success: #10b981;
+$color-success-bg: rgba(16, 185, 129, 0.1);
+$color-warning: #f59e0b;
+$color-warning-bg: rgba(245, 158, 11, 0.1);
+$color-error: #ef4444;
+$color-error-bg: rgba(239, 68, 68, 0.1);
+$color-info: #3b82f6;
+$color-info-bg: rgba(59, 130, 246, 0.1);
+
+// ============================================
+// TYPOGRAPHY - iPhone/Apple style
+// Inter is the main font (SF Pro fallback for Apple devices)
+// ============================================
+$font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;
+$font-display: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+$font-serif: 'Instrument Serif', 'Times New Roman', Georgia, serif;
+$font-mono: 'JetBrains Mono', 'SF Mono', Menlo, Monaco, monospace;
+
+// Font sizes - Apple-inspired
+$font-size-xs: 0.75rem;
+$font-size-sm: 0.8125rem;
+$font-size-base: 0.9375rem;
+$font-size-md: 1rem;
+$font-size-lg: 1.125rem;
+$font-size-xl: 1.375rem;
+$font-size-2xl: 1.75rem;
+$font-size-3xl: 2rem;
+$font-size-4xl: 2.5rem;
+$font-size-5xl: 3.25rem;
+$font-size-6xl: 4rem;
+$font-size-hero: clamp(2.25rem, 7vw, 4.5rem);
+
+// Font weights
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// Line heights
+$line-height-tight: 1.05;
+$line-height-snug: 1.2;
+$line-height-normal: 1.5;
+$line-height-relaxed: 1.6;
+$line-height-loose: 1.75;
+
+// Letter spacing - iPhone uses tight tracking
+$letter-spacing-tightest: -0.04em;
+$letter-spacing-tighter: -0.03em;
+$letter-spacing-tight: -0.02em;
+$letter-spacing-snug: -0.01em;
+$letter-spacing-normal: 0;
+$letter-spacing-wide: 0.02em;
+$letter-spacing-wider: 0.05em;
+
+// ============================================
+// SPACING - 4px base
+// ============================================
+$space-0: 0;
+$space-px: 1px;
+$space-0-5: 0.125rem;
+$space-1: 0.25rem;
+$space-2: 0.5rem;
+$space-3: 0.75rem;
+$space-4: 1rem;
+$space-5: 1.25rem;
+$space-6: 1.5rem;
+$space-7: 1.75rem;
+$space-8: 2rem;
+$space-10: 2.5rem;
+$space-12: 3rem;
+$space-14: 3.5rem;
+$space-16: 4rem;
+$space-20: 5rem;
+$space-24: 6rem;
+$space-28: 7rem;
+$space-32: 8rem;
+
+// ============================================
+// LAYOUT
+// ============================================
+$container-sm: 640px;
+$container-md: 768px;
+$container-lg: 1024px;
+$container-xl: 1200px;
+$container-2xl: 1440px;
+$container-max: 1200px;
+
+$header-height: 68px;
+$header-height-mobile: 60px;
+
+// ============================================
+// BORDER RADIUS
+// ============================================
+$radius-xs: 4px;
+$radius-sm: 6px;
+$radius-md: 10px;
+$radius-lg: 14px;
+$radius-xl: 18px;
+$radius-2xl: 24px;
+$radius-3xl: 32px;
+$radius-full: 9999px;
+
+// ============================================
+// SHADOWS
+// ============================================
+$shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.4);
+$shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.4);
+$shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
+$shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.5);
+$shadow-xl: 0 24px 48px rgba(0, 0, 0, 0.6);
+$shadow-2xl: 0 32px 64px rgba(0, 0, 0, 0.7);
+$shadow-glow: 0 0 40px rgba(139, 92, 246, 0.3);
+$shadow-glow-pink: 0 0 40px rgba(236, 72, 153, 0.3);
+$shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+// ============================================
+// Z-INDEX
+// ============================================
+$z-base: 1;
+$z-dropdown: 10;
+$z-sticky: 20;
+$z-fixed: 30;
+$z-modal-backdrop: 40;
+$z-modal: 50;
+$z-popover: 60;
+$z-tooltip: 70;
+$z-toast: 80;
+
+// ============================================
+// TRANSITIONS
+// ============================================
+$transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+$transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+$transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+$transition-bounce: 400ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+$transition-spring: 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+$ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+$ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+$ease-apple: cubic-bezier(0.4, 0, 0.2, 1);
+
+// ============================================
+// BREAKPOINTS
+// ============================================
+$breakpoint-xs: 480px;
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+$breakpoint-2xl: 1536px;

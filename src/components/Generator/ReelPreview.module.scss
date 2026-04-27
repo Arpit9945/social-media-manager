@@ -1,0 +1,169 @@
+.preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-4;
+  width: 100%;
+}
+
+.phoneFrame {
+  position: relative;
+  width: 100%;
+  max-width: 280px;
+  aspect-ratio: 9 / 16;
+  background: #000;
+  border-radius: 32px;
+  padding: 8px;
+  box-shadow:
+    0 0 0 2px #2d2d30,
+    0 20px 60px rgba(0, 0, 0, 0.6),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.phoneNotch {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 22px;
+  background: #000;
+  border-radius: 0 0 12px 12px;
+  z-index: 2;
+}
+
+.canvasWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 24px;
+  overflow: hidden;
+  background: $color-bg-tertiary;
+}
+
+.canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.playOverlay {
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background $transition-fast;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.2);
+  }
+}
+
+.playButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 50%;
+  color: white;
+  padding-left: 4px;
+}
+
+// Controls
+.controls {
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.controlsRow {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+}
+
+.controlBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: $color-surface;
+  border: 1px solid $color-border-default;
+  border-radius: 50%;
+  color: $color-text-primary;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: $color-surface-hover;
+    border-color: $color-border-strong;
+  }
+}
+
+.timeDisplay {
+  margin-left: auto;
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  font-variant-numeric: tabular-nums;
+}
+
+.progressTrack {
+  position: relative;
+  height: 6px;
+  background: $color-surface;
+  border-radius: $radius-full;
+  cursor: pointer;
+  overflow: hidden;
+
+  &:hover .progressThumb {
+    opacity: 1;
+  }
+}
+
+.progressFill {
+  height: 100%;
+  background: $gradient-primary;
+  border-radius: $radius-full;
+  transition: width 0.05s linear;
+}
+
+.progressThumb {
+  position: absolute;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  background: white;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity $transition-fast;
+  box-shadow: $shadow-md;
+  pointer-events: none;
+}
+
+.previewMeta {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+}
+
+.metaItem {
+  font-variant-numeric: tabular-nums;
+}
+
+.metaDivider {
+  opacity: 0.5;
+}

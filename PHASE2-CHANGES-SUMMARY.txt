@@ -1,0 +1,65 @@
+ASMA - PHASE 2 CHANGES SUMMARY
+================================
+
+NEW FILES (15):
+---------------
+src/app/onboarding/page.js
+src/app/settings/page.js
+src/components/Logo/Logo.js
+src/components/Onboarding/OnboardingClient.js
+src/components/Onboarding/Onboarding.module.scss
+src/components/Onboarding/steps/StepWelcome.js
+src/components/Onboarding/steps/StepIdentity.js
+src/components/Onboarding/steps/StepColors.js
+src/components/Onboarding/steps/StepAudience.js
+src/components/Onboarding/steps/StepVoice.js
+src/components/Onboarding/steps/Step.module.scss
+src/components/Settings/SettingsClient.js
+src/components/Settings/Settings.module.scss
+PHASE2-MIGRATION.md
+
+UPDATED FILES (24):
+-------------------
+src/app/icon.svg                                  → New logo
+src/app/layout.js                                 → Inter font
+src/app/login/page.js                             → New logo
+src/app/login/login.module.scss                   → Refined
+src/app/dashboard/page.js                         → Onboarding check
+src/components/Auth/LoginForm.js                  → Refined
+src/components/Auth/LoginForm.module.scss         → Refined
+src/components/Dashboard/DashboardClient.js       → Brand info, settings
+src/components/Dashboard/Dashboard.module.scss    → No clipping
+src/components/Footer/Footer.js                   → New logo
+src/components/Footer/Footer.module.scss          → Refined
+src/components/Header/Header.js                   → New logo
+src/components/Header/Header.module.scss          → Apple-style
+src/components/Landing/Hero.js                    → 1 italic, fixed cards
+src/components/Landing/Hero.module.scss           → Refined
+src/components/Landing/Features.js                → Animation fix
+src/components/Landing/Features.module.scss       → No broken animation
+src/components/Landing/HowItWorks.js              → Animation fix
+src/components/Landing/HowItWorks.module.scss     → Cards visible
+src/components/Landing/Pricing.js                 → No italic gradient
+src/components/Landing/Pricing.module.scss        → Refined
+src/components/Landing/FAQ.js                     → Cleaner
+src/components/Landing/FAQ.module.scss            → Refined
+src/components/Landing/CTA.js                     → Refined
+src/components/Landing/CTA.module.scss            → Refined
+src/lib/supabase/middleware.js                    → Onboarding redirect
+src/styles/abstracts/_variables.scss              → Inter + iPhone tokens
+src/styles/base/_global.scss                      → Inter, animations
+
+UNCHANGED FILES:
+----------------
+.env.local                  (your API keys)
+package.json
+next.config.js
+src/app/page.js             (uses updated components automatically)
+src/app/auth/callback/route.js
+src/lib/supabase/client.js
+src/lib/supabase/server.js
+src/middleware.js
+src/styles/main.scss
+src/styles/base/_reset.scss
+src/styles/abstracts/_mixins.scss
+supabase-schema.sql

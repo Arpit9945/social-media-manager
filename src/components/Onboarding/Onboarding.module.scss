@@ -1,0 +1,189 @@
+.page {
+  min-height: 100vh;
+  background: $color-bg-primary;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.bgGlow {
+  position: fixed;
+  top: -200px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 800px;
+  background: $gradient-mesh;
+  filter: blur(80px);
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: $z-sticky;
+  background: rgba(10, 10, 11, 0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid $color-border-subtle;
+}
+
+.headerInner {
+  @include container;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  @include md {
+    height: 68px;
+  }
+}
+
+.logoLink {
+  display: flex;
+  align-items: center;
+  color: $color-text-primary;
+}
+
+.stepCounter {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  font-weight: $font-weight-medium;
+  letter-spacing: $letter-spacing-snug;
+
+  @include md {
+    font-size: $font-size-sm;
+  }
+}
+
+.progressBar {
+  height: 2px;
+  background: $color-border-subtle;
+  position: relative;
+}
+
+.progressFill {
+  height: 100%;
+  background: $gradient-primary;
+  transition: width $transition-slow;
+}
+
+.main {
+  position: relative;
+  z-index: 1;
+  padding: $space-12 $space-4 $space-16;
+
+  @include md {
+    padding: $space-16 $space-6 $space-20;
+  }
+}
+
+.stepContainer {
+  max-width: 580px;
+  margin: 0 auto;
+  animation: slideUp 0.5s $ease-out both;
+}
+
+.error {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-3 $space-4;
+  background: $color-error-bg;
+  border: 1px solid $color-error;
+  border-radius: $radius-md;
+  color: $color-error;
+  font-size: $font-size-sm;
+  margin-top: $space-6;
+}
+
+.navButtons {
+  display: flex;
+  gap: $space-3;
+  margin-top: $space-8;
+  align-items: center;
+}
+
+.backButton,
+.nextButton,
+.submitButton {
+  @include button-base;
+  height: 48px;
+  padding: 0 $space-6;
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+  letter-spacing: $letter-spacing-snug;
+  border-radius: $radius-full;
+}
+
+.backButton {
+  background: transparent;
+  color: $color-text-secondary;
+  border: 1px solid $color-border-default;
+
+  &:hover:not(:disabled) {
+    background: $color-surface;
+    color: $color-text-primary;
+    border-color: $color-border-strong;
+  }
+
+  svg {
+    transition: transform $transition-base;
+  }
+
+  &:hover:not(:disabled) svg {
+    transform: translateX(-2px);
+  }
+}
+
+.nextButton,
+.submitButton {
+  background: $color-text-primary;
+  color: $color-bg-primary;
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: $gradient-primary;
+    opacity: 0;
+    transition: opacity $transition-base;
+  }
+
+  & > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  svg {
+    transition: transform $transition-base;
+  }
+
+  &:hover:not(:disabled) {
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: $shadow-glow;
+
+    &::before {
+      opacity: 1;
+    }
+
+    svg {
+      transform: translateX(2px);
+    }
+  }
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}

@@ -1,0 +1,261 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: $z-fixed;
+  height: $header-height-mobile;
+  background: transparent;
+  transition: all $transition-base;
+
+  @include md {
+    height: $header-height;
+  }
+
+  &.scrolled {
+    background: rgba(10, 10, 11, 0.72);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid $color-border-subtle;
+  }
+}
+
+.container {
+  @include container;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-6;
+}
+
+.logoLink {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  flex-shrink: 0;
+  color: $color-text-primary;
+  transition: opacity $transition-fast;
+
+  &:hover { opacity: 0.85; }
+}
+
+.nav {
+  display: none;
+  align-items: center;
+  gap: $space-8;
+
+  @include lg {
+    display: flex;
+  }
+}
+
+.navLink {
+  color: $color-text-secondary;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  letter-spacing: $letter-spacing-snug;
+  transition: color $transition-fast;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 1px;
+    background: $color-text-primary;
+    transition: width $transition-base;
+  }
+
+  &:hover {
+    color: $color-text-primary;
+    &::after { width: 100%; }
+  }
+}
+
+.actions {
+  display: none;
+  align-items: center;
+  gap: $space-2;
+
+  @include md {
+    display: flex;
+  }
+}
+
+.signIn {
+  color: $color-text-secondary;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  padding: $space-2 $space-4;
+  border-radius: $radius-full;
+  transition: color $transition-fast;
+
+  &:hover {
+    color: $color-text-primary;
+  }
+}
+
+.cta {
+  @include button-base;
+  padding: $space-2 $space-4;
+  font-size: $font-size-sm;
+  background: $color-text-primary;
+  color: $color-bg-primary;
+  border-radius: $radius-full;
+  font-weight: $font-weight-semibold;
+  letter-spacing: $letter-spacing-snug;
+  transition: all $transition-base;
+  height: 36px;
+
+  svg {
+    transition: transform $transition-base;
+  }
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(255, 255, 255, 0.15);
+
+    svg {
+      transform: translateX(2px);
+    }
+  }
+}
+
+.menuButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  color: $color-text-primary;
+  transition: opacity $transition-fast;
+
+  @include md {
+    display: none;
+  }
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.menuIcon {
+  width: 22px;
+  height: 14px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  span {
+    display: block;
+    width: 100%;
+    height: 1.5px;
+    background: currentColor;
+    border-radius: 2px;
+    transition: all $transition-base;
+    transform-origin: center;
+  }
+
+  &.open {
+    span:nth-child(1) {
+      transform: translateY(6.5px) rotate(45deg);
+    }
+    span:nth-child(2) {
+      transform: translateY(-6.5px) rotate(-45deg);
+    }
+  }
+}
+
+// Mobile menu
+.mobileMenu {
+  position: fixed;
+  top: $header-height-mobile;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(10, 10, 11, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: $z-modal-backdrop;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all $transition-base;
+  overflow-y: auto;
+
+  @include md {
+    display: none;
+  }
+
+  &.mobileMenuOpen {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+}
+
+.mobileNav {
+  padding: $space-6;
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.mobileLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $space-4 $space-3;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-medium;
+  letter-spacing: $letter-spacing-snug;
+  color: $color-text-primary;
+  border-bottom: 1px solid $color-border-subtle;
+  opacity: 0;
+  animation: slideUp 0.3s $ease-out forwards;
+
+  svg {
+    color: $color-text-tertiary;
+    transition: transform $transition-fast;
+  }
+
+  &:active svg {
+    transform: translateX(4px);
+  }
+}
+
+.mobileActions {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  margin-top: $space-8;
+}
+
+.mobileSignIn {
+  @include button-base;
+  width: 100%;
+  padding: $space-4;
+  background: $color-surface;
+  color: $color-text-primary;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-lg;
+  font-size: $font-size-base;
+}
+
+.mobileCta {
+  @include button-base;
+  width: 100%;
+  padding: $space-4;
+  background: $color-text-primary;
+  color: $color-bg-primary;
+  border-radius: $radius-lg;
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+}

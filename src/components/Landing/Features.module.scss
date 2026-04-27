@@ -1,0 +1,211 @@
+.features {
+  padding: $space-20 0;
+  position: relative;
+
+  @include md {
+    padding: $space-24 0;
+  }
+}
+
+.container {
+  @include container;
+}
+
+.header {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto $space-12;
+
+  @include md {
+    margin-bottom: $space-16;
+  }
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 0.6875rem;
+  font-weight: $font-weight-semibold;
+  color: $color-accent;
+  letter-spacing: $letter-spacing-wider;
+  text-transform: uppercase;
+  margin-bottom: $space-4;
+  padding: $space-1 $space-3;
+  background: $color-accent-subtle;
+  border-radius: $radius-full;
+}
+
+.title {
+  font-family: $font-display;
+  font-size: $font-size-3xl;
+  font-weight: $font-weight-semibold;
+  letter-spacing: $letter-spacing-tightest;
+  line-height: 1.1;
+  color: $color-text-primary;
+  margin-bottom: $space-4;
+
+  @include md {
+    font-size: $font-size-4xl;
+  }
+
+  @include lg {
+    font-size: $font-size-5xl;
+  }
+}
+
+.muted {
+  color: $color-text-tertiary;
+}
+
+.subtitle {
+  font-size: $font-size-md;
+  color: $color-text-secondary;
+  line-height: $line-height-relaxed;
+  letter-spacing: $letter-spacing-snug;
+
+  @include md {
+    font-size: $font-size-lg;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-3;
+
+  @include sm {
+    grid-template-columns: repeat(2, 1fr);
+    gap: $space-4;
+  }
+
+  @include lg {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+  padding: $space-6;
+  background: $color-surface;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-xl;
+  cursor: default;
+  overflow: hidden;
+  transition: all $transition-base;
+
+  @include md {
+    padding: $space-7;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, currentColor, transparent);
+    opacity: 0;
+    transition: opacity $transition-base;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    border-color: $color-border-strong;
+    background: $color-bg-elevated;
+
+    &::before {
+      opacity: 0.4;
+    }
+
+    .cardIcon {
+      transform: scale(1.05);
+
+      &::before {
+        opacity: 0.2;
+      }
+    }
+  }
+}
+
+.card_violet { color: #8b5cf6; }
+.card_pink { color: #ec4899; }
+.card_blue { color: #3b82f6; }
+.card_green { color: #10b981; }
+.card_orange { color: #f59e0b; }
+.card_cyan { color: #06b6d4; }
+
+.cardIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: $color-bg-tertiary;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-md;
+  transition: transform $transition-base;
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: currentColor;
+    opacity: 0.1;
+    transition: opacity $transition-base;
+  }
+
+  svg {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.cardContent {
+  flex: 1;
+}
+
+.cardTitleRow {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  margin-bottom: $space-2;
+  flex-wrap: wrap;
+}
+
+.cardTitle {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin: 0;
+  line-height: $line-height-snug;
+  letter-spacing: $letter-spacing-tight;
+
+  @include md {
+    font-size: $font-size-lg;
+  }
+}
+
+.cardBadge {
+  font-size: 0.625rem;
+  font-weight: $font-weight-semibold;
+  color: currentColor;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 2px 8px;
+  border-radius: $radius-sm;
+  border: 1px solid currentColor;
+  text-transform: uppercase;
+  letter-spacing: $letter-spacing-wider;
+}
+
+.cardDescription {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  line-height: $line-height-relaxed;
+  margin: 0;
+  letter-spacing: $letter-spacing-snug;
+}
